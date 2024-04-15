@@ -17,7 +17,7 @@ const PastBills = () => {
 
     const fetchInActiveBills = async () => {
         try {
-            const response = await axios.get(`http://localhost:3001/BillReminders/fetchBills?userName=${userName}&activeStatus=${0}`);
+            const response = await axios.get(`https://financemvc.onrender.com/BillReminders/fetchBills?userName=${userName}&activeStatus=${0}`);
             setBills(response.data.activeBills);
         } catch (e) {
             console.log(e.message);
