@@ -25,7 +25,7 @@ const BillReminder = () => {
 
   const fetchActiveBills = async () => {
     try {
-      const response = await axios.get(`http://localhost:3001/BillReminders/fetchBills?userName=${userName}&activeStatus=${1}`);
+      const response = await axios.get(`https://financemvc.onrender.com/BillReminders/fetchBills?userName=${userName}&activeStatus=${1}`);
       setBills(response.data.activeBills);
     } catch (err) {
       console.log(err.message);
@@ -59,7 +59,7 @@ const BillReminder = () => {
 
     try {
       
-      await axios.post('http://localhost:3001/BillReminders/saveBill', billData);
+      await axios.post('https://financemvc.onrender.com/BillReminders/saveBill', billData);
       console.log("Getaa billa");
     } catch (e) {
       console.log(e);
