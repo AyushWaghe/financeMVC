@@ -63,13 +63,13 @@ function Transact() {
     try {
       if (hasApplied) {
         // console.log("Applied");
-        const response = await axios.get(`http://localhost:3001/fetchTransactions/fetch?userName=${userName}&month=${appliedMonth}`);
+        const response = await axios.get(`https://financemvc.onrender.com/fetchTransactions/fetch?userName=${userName}&month=${appliedMonth}`);
         setTransactions(response.data.transactions);
         setMonthTotal(response.data.monthTotal);
         console.log("Transactions:", response.data.transactions);
       } else {
         // console.log("Not appleid");
-        const response = await axios.get(`http://localhost:3001/fetchTransactions/fetch?userName=${userName}&month=${Month}`);
+        const response = await axios.get(`https://financemvc.onrender.com/fetchTransactions/fetch?userName=${userName}&month=${Month}`);
         setTransactions(response.data.transactions);
         setMonthTotal(response.data.monthTotal);
         console.log("Transactions:", response.data.transactions);
@@ -110,7 +110,7 @@ function Transact() {
     if (isUpdating) {
       console.log("Updating data", transactionData);
       try {
-        await axios.post(`http://localhost:3001/getTransactionAndStoreThem/updateTransaction`, null, {
+        await axios.post(`https://financemvc.onrender.com/getTransactionAndStoreThem/updateTransaction`, null, {
           params: {
             ...transactionData,
             id: currentTransactionId,
@@ -123,7 +123,7 @@ function Transact() {
       }
     } else {
       try {
-        await axios.post('http://localhost:3001/getTransactionAndStoreThem/saveTransaction', transactionData);
+        await axios.post('https://financemvc.onrender.com/getTransactionAndStoreThem/saveTransaction', transactionData);
       } catch (error) {
         console.error('Error creating transaction:', error.message);
       }
