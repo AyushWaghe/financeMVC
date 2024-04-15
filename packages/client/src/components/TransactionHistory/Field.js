@@ -27,7 +27,7 @@ function Field({ transactions, onDelete, onEdit, Month,total }) {
     const Month=monthsMap.get(monthNumber);
     console.log("Month",Month);
     try {
-      await axios.delete('http://localhost:3001/deleteTransaction/delete', {
+      await axios.delete('https://financemvc.onrender.com/deleteTransaction/delete', {
         params: {
           id: id,
           userName: userName,
