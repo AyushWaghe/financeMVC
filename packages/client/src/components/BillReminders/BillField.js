@@ -10,7 +10,7 @@ function BillField({bills,onDelete}) {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete('http://localhost:3001/BillReminders/deleteBill', {
+      await axios.delete('https://financemvc.onrender.com/BillReminders/deleteBill', {
         params: {
           billId: id,
           userName: userName,
