@@ -19,14 +19,14 @@ const Main = () => {
         `https://saurav.tech/NewsAPI/top-headlines/category/business/in.json`
       );
 
-      // Calculate the start and end index for the slice based on the current page
+
       const startIndex = (currentPage - 1) * 6;
       const endIndex = currentPage * 6;
 
-      // Set the new articles based on the slice
+
       setArticles(response.data.articles.slice(startIndex, endIndex));
 
-      // Update the current page number, cycling back to 1 if it exceeds 10
+
       setCurrentPage((currentPage % 10) + 1);
     } catch (error) {
       console.log(error);
@@ -35,7 +35,7 @@ const Main = () => {
 
   useEffect(() => {
     fetchNews();
-  }, []); // Trigger fetchNews when currentPage changes
+  }, []); 
 
   return (
     <div className="SuperMasterContainer">
