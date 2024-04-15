@@ -25,7 +25,7 @@ function Home() {
 
   const fetchBillAlert = async () => {
     try {
-      const response = await axios.get(`http://localhost:3001/BillReminders/fetchBillAlert?userName=${userName}`);
+      const response = await axios.get(`https://financemvc.onrender.com/BillReminders/fetchBillAlert?userName=${userName}`);
       setAlertBills(response.data.alertBills);
       setAlertBillPopUp(true);
 
