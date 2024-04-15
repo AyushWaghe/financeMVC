@@ -22,7 +22,7 @@ import { signup,setBillAlertStatus } from '../../features/userSlice';
       }));
 
       try{
-        const response = await axios.post('http://localhost:3001/register/userSignUp',{
+        const response = await axios.post('https://financemvc.onrender.com/register/userSignUp',{
           userName,
           userPassword,
         });
