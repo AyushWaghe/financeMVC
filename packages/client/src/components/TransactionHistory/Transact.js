@@ -236,7 +236,7 @@ function Transact() {
           </form>
         </div>
         <div className="form-row">
-          <label htmlFor="month">Month:</label>
+          <label htmlFor="month">Filter:</label>
           <select
             id="month"
             name="month"
