@@ -1,0 +1,69 @@
+
+.navBar{
+  margin-top: 0%;
+}
+
+.MasterContainer{
+  display: flex;
+  flex-direction: column;
+
+}
+
+.card {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    width: 1000px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    height: 70px;
+  }
+  
+  .Container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    column-gap: 30px;
+  }
+  
+  .form-group{
+    display: flex;
+    flex-direction: row;
+  }
+
+  .des{
+    margin-left: 50px;
+  }
+
+  .form-group:last-child {
+    margin-right: 0; /* Remove right margin from the last form group */
+  }
+  
+  .form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input[type="text"],
+  .form-group input[type="number"],
+  .form-group input[type="date"] {
+    width: calc(100% - 16px); /* Adjust width to account for padding */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .form-group input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  

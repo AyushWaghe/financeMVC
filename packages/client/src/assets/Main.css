@@ -1,0 +1,51 @@
+.SuperMasterContainer{
+    padding: 0px;
+}
+
+.navBar{
+    margin-top:  1000px;
+}
+
+.Master {
+  /* background-color: red; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.NewsCardContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.fetch-button {
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 5px;
+  margin:2%;
+}
+
+.fetch-button:hover {
+  background-color: darkgreen;
+}
+
+.fetch-button:active {
+  background-color: forestgreen;
+}
+
+.NewsPageHeading{
+    font-size: 40px;
+    font-weight: bold;
+    margin: 1%;
+}
+
+

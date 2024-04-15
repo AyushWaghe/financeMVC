@@ -1,0 +1,58 @@
+  /* Styles.css */
+
+  /* Card2 Styles */
+  .transaction-history-container{
+    padding: 0px;
+  }
+  .card2 {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 1100px;
+    margin-top: 3px;
+    margin-left: 10%;
+    border: solid rgb(234, 232, 229);
+  }
+
+  .card2 h2 {
+    color: #333;
+  }
+
+  /* Transaction Form Styles */
+  .transaction-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .form-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .form-row label {
+    margin-right: 10px;
+  }
+
+  .input-field {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+
+  .submit-button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .submit-button:hover {
+    background-color: #45a049;
+  }

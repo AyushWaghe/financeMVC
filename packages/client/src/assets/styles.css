@@ -1,0 +1,340 @@
+.mydiv , .mydiv2 , .mydiv3, .mydiv4 , .mydiv5{
+    background-color: #182527;
+    height: 700px;
+    width: 100%;
+    display: grid;
+}
+.mydiv{
+    display: flex;
+    flex-direction: row;
+}
+
+.DivHeader{
+    font-size: 50px;
+    color: #20cd8d;
+    margin-bottom: 1%;
+}
+
+.inputForm{
+    display: flex;
+    flex-direction: column;
+    color: white;
+    text-align: left;
+    margin-top:1%;
+    width: 50vh;
+    margin-left: 5%;
+}
+
+.Heading{
+    font-size: 40px;
+}
+
+.input {
+    margin-top: 5%;
+    width: 100%;
+    color: white;
+    border: 2px solid green; /* Green border */
+    background-color: transparent; /* Transparent background */
+    padding: 10px; /* Adjust padding as needed */
+    border-radius: 5px; /* Optional: Add border-radius for rounded corners */
+    width: 100%; /* Optional: Set width as needed */
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
+}
+
+
+.TitleImage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mydiv5{
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+}
+
+.mydiv4{
+    background-color: #ccf4e5;
+    display: grid;
+    grid-template-rows:100px 200px 200px 200px ;
+    row-gap: 5px;
+}
+
+.Header{
+    font-size: 50px;
+    margin: 0px;
+    margin-top: 10px;
+    color: #20cd8d;
+    font-family: 'Nunito';
+    font-weight: bold;
+}
+
+.Set{
+    height: 200px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    /* background-color: rebeccapurple; */
+    column-gap: 300px;
+}
+
+.UniqueContent{
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+    width: 400px;
+    /* background-color: #182527; */
+
+}
+.Heads{
+    margin: 0px;
+    font-family: 'Nunito';
+}
+.HeadsContent{
+    margin: 0px;
+    font-size: 20px;
+    font-family: 'Nunito';
+}
+
+.mydiv3 {
+    height: 1400px;
+    background-color: aliceblue;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    row-gap: 0px;
+}
+
+ .mydiv2{
+    background-color: #20cd8d;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    column-gap: 50px;
+
+ }
+
+.TitleHeader {
+    color: white;
+    font-size: 140px;
+    font-family: 'Nunito', sans-serif;
+    margin-top: 300px;
+    font-weight: bold;
+    
+}
+
+
+.HeadingDiv{
+    width: 100%;
+    height: 100%;
+    /* background-color: black; */
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.TitleImage{
+    width: 100%;
+    height: 100%;
+    /* background-color: rebeccapurple; */
+}
+
+.paragraphStyle{
+    /* display: inline; */
+    margin-left: 150px;
+    margin-top: -100px;
+}
+
+.paragraphStyle2 {
+    /* display: inline; */
+    margin-top: -40px;
+    margin-left: 70px;
+}
+
+.ButtonDiv{
+    display: flex;
+    flex-direction: row;
+    column-gap: 50px;
+    margin-top: 50px;
+    margin-left: 150px;
+    font-family: 'Nunito';
+    /* background-color: red; */
+}
+
+.SignButton, .LoginButton{
+    font-family: 'Nunito', sans-serif;
+    font-size: 35px;
+    border-radius: 50px;
+    background-color: #20cd8d;
+    border: none;
+    font-family: 'Nunito';
+}
+.SignButton{
+    color: white;
+    background-color: #182527;
+}
+
+.Block {
+    height: 35%;
+    width: 15%;
+    background-color: #ccc;
+    position: relative; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    overflow: hidden; /* Hide overflow to prevent text from showing initially */
+  }
+  
+  .Ti{
+    font-weight: bold;
+    font-size: 25px;
+  }
+
+  .Description {
+    border-radius: 5px;
+    padding:20px;
+    display: flex;
+    text-align: justify;
+    position: absolute;
+    top: 30%; 
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background for better visibility */
+    color: #fff;
+    transform: translateY(100%); /* Initially positioned below the icon */
+    transition: transform 0.3s ease; /* Smooth transition for sliding effect */
+  }
+  
+  .Block:hover .Description {
+    transform: translateY(0); /* Slide in the description when hovered */
+  }
+  
+
+.ImageLeftContentRight, .ImageRightContentLeft{
+    height: 350px;
+    width: 100%;
+    /* background-color: red; */
+    display: flex;
+    flex-direction: row;
+}
+
+
+.ContentRight , .ContentLeft{
+    height: 350px;
+    width: 50%;
+    /* background-color: aqua; */
+    text-align: left;
+    padding: 50px;
+    padding-top: 90px;
+
+}
+.ContentLeft{
+    text-align: right;
+}
+.ContentHeading{
+    font-family: 'Nunito';
+    text-align: left;
+    font-size: 50px;
+    margin: 0px;
+}
+.ContentText, .ContentTextRight{
+    font-family: 'Nunito';
+    text-align: left;
+    margin: 0px;
+    font-size: 25px;
+}
+.Image{
+    height: 350px;
+    width: 50%;
+    /* background-color: black; */
+}
+
+/* Login page style  */
+
+.login-container {
+  margin: auto;
+  margin-top: 100px;
+  width: 300px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-heading {
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-label {
+  margin-bottom: 10px;
+}
+
+.login-input {
+  padding: 8px;
+  margin-top: 4px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.login-button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.login-button:hover {
+  background-color: #45a049;
+}
+
+.icon {
+    color: #1eca97; /* Slightly darker version of #20cd8d */
+  }
+  
+
+  .zoomEffect {
+    transition: transform 0.3s ease-in-out;
+  }.icon.zoom {
+    transition: transform 0.3s ease;
+  }
+  
+  .icon.zoom:hover {
+    transform: scale(1.2);
+  }  
+  
+  .zoomEffect:hover {
+    transform: scale(1.1);
+  }
+  
+  .icon.zoom {
+    transition: transform 0.3s ease;
+  }
+  
+  .icon.zoom:hover {
+    transform: scale(1.2);
+  }
+  
+
+
+
+
+
+
+

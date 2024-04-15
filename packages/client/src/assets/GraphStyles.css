@@ -1,0 +1,41 @@
+.GraphContainer{
+  padding: 0px;
+  /* display: flex; */
+  /* flex-direction: row; */
+}
+
+.GraphMaster{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.BarGraph{
+    width:500px;
+    height: 260px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    padding: 20px;
+}
+  /* Hover effect - scale the card on hover */
+  .BarGraph:hover {
+    transform: scale(1.05);
+  }
+
+  .ColDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    column-gap: 250px;
+  }
+
+  .GraphTitle{
+    font-weight: bold;
+
+  }
+  

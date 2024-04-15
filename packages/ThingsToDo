@@ -1,0 +1,13 @@
+
+
+OVERALL THINGS LEFT-:
+1)Home page setup 
+2)Add logout feature
+
+BUG FIXES ->
+1)Bill reminder page not able to dynamically render things 
+2)Not to loose user information even after page getting refreshed
+
+<---------------------->
+IF POSSIBLE-:
+1)Add a profile feature where use can store bank detials and other information about him/her

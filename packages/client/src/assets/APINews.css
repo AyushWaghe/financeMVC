@@ -1,0 +1,38 @@
+/* News.css */
+
+
+.news-card {
+    border: 1px solid #ddd;
+    width: 500px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 20px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+  
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+  
+  .news-header {
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  
+  .news-title {
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  .news-details {
+    color: #555;
+  }
+  
+  .news-author,
+  .news-source {
+    margin: 5px 0;
+  }
+  

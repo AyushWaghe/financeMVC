@@ -1,0 +1,131 @@
+General Styles body {
+  font-family: "Arial", sans-serif;
+  margin: 0;
+}
+
+.home-container{
+  width: 100%;
+  background-color:#8bf0cb;
+}
+
+.Model {
+  z-index: 5;
+  position: fixed; /* Set position to absolute for proper stacking */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(128, 128, 128, 0.5);
+  /* padding-left: 50px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.SideNavBarInHomePage {
+  z-index: 6;
+  position: fixed; /* Set position to absolute for proper stacking */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/* Home Container */
+/* .home-container {
+  display: flex;
+  flex-direction: column;
+} */
+
+.sidebar h2 {
+  color: black;
+  text-align: center;
+}
+
+.sidebar a {
+  padding: 8px;
+  text-decoration: none;
+  font-size: 18px;
+  color: black;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Content Styles */
+.content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 50px;
+  margin-left: 0px;
+  padding: 20px;
+}
+
+.content-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  column-gap: 10px;
+  width: 100%;
+}
+
+/* HomePageCards Styles */
+.HomePageCards {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  height: 150px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  position: relative; /* Added position relative for button positioning */
+}
+
+.HomePageCards h2 {
+  color: #333;
+}
+
+/* Explore Button Styles */
+.explore-button {
+  background-color: #4caf50; /* Green color */
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.explore-button:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 700px) {
+  .home-container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    box-shadow: none; /* Remove box-shadow on small screens */
+  }
+
+  .content {
+    margin-left: 0;
+  }
+}
