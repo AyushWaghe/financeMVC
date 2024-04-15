@@ -70,7 +70,7 @@ function Home() {
         <div className="content-row">
           <div className="HomePageCards" id="transaction-history">
             <h2>Transaction History</h2>
-            <p>This is an example transaction history content.</p>
+            <p>Store and track your transactions month wise easily.</p>
             {/* Explore button added */}
             <button className="explore-button"
               onClick={() => navigate("/Transact")}
@@ -92,7 +92,7 @@ function Home() {
         <div className="content-row">
           <div className="HomePageCards" id="transaction-history">
             <h2>Graphs</h2>
-            <p>This is an example transaction history content.</p>
+            <p>Visualize and track your total monthly expenditure and plan accordingly</p>
             {/* Explore button added */}
             <button className="explore-button"
               onClick={() => navigate("/Graphs")}
@@ -102,7 +102,7 @@ function Home() {
 
           <div className="HomePageCards" id="transaction-history">
             <h2>Bill reminders</h2>
-            <p>This is an example transaction history content.</p>
+            <p>Never miss a payment with reminder feature, ensuring you stay on top of your financial commitments effortlessly.</p>
             {/* Explore button added */}
             <button className="explore-button"
               onClick={() => navigate("/BillReminder")}
@@ -114,7 +114,7 @@ function Home() {
         <div className="content-row">
           <div className="HomePageCards" id="transaction-history">
             <h2>Past bills</h2>
-            <p>This is an example transaction history content.</p>
+            <p>Get a history of past bills.</p>
             {/* Explore button added */}
             <button className="explore-button"
               onClick={() => navigate("/PastBills")}
