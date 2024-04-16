@@ -11,7 +11,7 @@ const fetchBillsController = async (req, res) => {
                 return []; // Return an empty array if user or user.bills is null/undefined
             }
 
-            let activeBills; // Define activeBills here
+            let activeBills; 
 
             if (activeStatus == 1) {
                 activeBills = user.bills.filter(bill => new Date(bill.billDueDate) >= todaysDate);
