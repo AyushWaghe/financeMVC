@@ -10,7 +10,7 @@ function Div1() {
         display: "inline"
     }
     const buttonStyle = {
-        fontFamily: 'Nunito, sans-serif', // Replace 'YourChosenFont' with the desired font
+        fontFamily: 'Nunito, sans-serif', 
     };
 
     return (
