@@ -8,7 +8,7 @@
 **password**-:321
 
 Deployment link-:https://financialtracker-1sbv.onrender.com
-**(The render server may take 3-4 minutes to initial respond/login due the render constraints)**
+**(The render server may take 3-4 minutes to initial respond/login due to the trail version of render)**
 
 3)Teach Stack used-:MongoDB, Node js, Redux, Express js, React,
 HTML, CSS, JavaScript
