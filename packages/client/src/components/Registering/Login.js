@@ -63,7 +63,6 @@ function Login() {
           className="login-input"
           value={userName}
           onChange={(e) => setUserName(e.target.value)}
-          placeholder="Enter your username(Without whitespaces)"
         />
 
         <label htmlFor="password" className="login-label">
