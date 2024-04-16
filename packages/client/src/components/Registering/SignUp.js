@@ -39,7 +39,7 @@ function SignUp() {
     } catch (err) {
       console.log(err);
     } finally {
-      setLoading(false); // Set loading back to false after server response
+      setLoading(false); 
     }
   };
 
