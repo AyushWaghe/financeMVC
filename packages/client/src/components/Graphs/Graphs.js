@@ -56,7 +56,7 @@ const Graphs = () => {
     const monthlyTotals = {};
     transactionData.forEach(transaction => {
         const month = transaction.month;
-        const total = transaction.total; // Assuming you have a field named monthTotal for the total amount
+        const total = transaction.total; 
         if (monthlyTotals[month]) {
             monthlyTotals[month] += total;
         } else {
@@ -64,7 +64,7 @@ const Graphs = () => {
         }
     });
 
-    // Prepare data for the bar chart
+
     const barChartData = {
         labels: Object.keys(monthlyTotals), // Months
         datasets: [
@@ -78,7 +78,7 @@ const Graphs = () => {
         ],
     };
 
-    // Prepare data for the pie chart
+  
     const pieChartData = {
         labels: Object.keys(monthlyTotals), // Months
         datasets: [
