@@ -32,7 +32,7 @@ const updateTransactionController = async (req, res) => {
                 } else {
                     return res.status(404).json({ message: 'Transaction not found' });
                 }
-            } else { // Month got updated hence now you have to delete it from the prev month and put it in new month
+            } else { 
                 const newTransaction = {
                     id: id,
                     description: description,
@@ -44,7 +44,7 @@ const updateTransactionController = async (req, res) => {
                 const transactionIndexToBeDeleted = user.transactions.findIndex(t => t.month === prevMonth);
 
                 if (transactionIndexToBeDeleted !== -1) {
-                    // Use $pull to remove the transaction from the transactionDetails array
+                   
                     await Transaction.findOneAndUpdate(
                         { userTransactions: userName, 'transactions.month': prevMonth },
                         { $pull: { 'transactions.$.transactionDetails': { id: id } } },
