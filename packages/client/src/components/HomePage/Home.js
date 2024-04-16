@@ -71,21 +71,19 @@ function Home() {
           <div className="HomePageCards" id="transaction-history">
             <h2>Transaction History</h2>
             <p>Store and track your transactions month wise easily.</p>
-            {/* Explore button added */}
             <button className="explore-button"
               onClick={() => navigate("/Transact")}
             >Explore</button>
-            {/* Add your transaction history content here */}
           </div>
 
           <div className="HomePageCards" id="transaction-history">
             <h2>FinanceFeed</h2>
             <p>Stay Informed with the Latest Financial News</p>
-            {/* Explore button added */}
+
             <button className="explore-button"
               onClick={() => navigate("/Main")}
             >Explore</button>
-            {/* Add your transaction history content here */}
+           
           </div>
         </div>
 
@@ -93,21 +91,21 @@ function Home() {
           <div className="HomePageCards" id="transaction-history">
             <h2>Graphs</h2>
             <p>Visualize and track your total monthly expenditure and plan accordingly</p>
-            {/* Explore button added */}
+           
             <button className="explore-button"
               onClick={() => navigate("/Graphs")}
             >Explore</button>
-            {/* Add your transaction history content here */}
+   
           </div>
 
           <div className="HomePageCards" id="transaction-history">
             <h2>Bill reminders</h2>
             <p>Never miss a payment with reminder feature, ensuring you stay on top of your financial commitments effortlessly.</p>
-            {/* Explore button added */}
+      
             <button className="explore-button"
               onClick={() => navigate("/BillReminder")}
             >Explore</button>
-            {/* Add your transaction history content here */}
+            
           </div>
         </div>
 
@@ -115,11 +113,11 @@ function Home() {
           <div className="HomePageCards" id="transaction-history">
             <h2>Past bills</h2>
             <p>Get a history of past bills.</p>
-            {/* Explore button added */}
+         
             <button className="explore-button"
               onClick={() => navigate("/PastBills")}
             >Explore</button>
-            {/* Add your transaction history content here */}
+      
           </div>
         </div>
 
