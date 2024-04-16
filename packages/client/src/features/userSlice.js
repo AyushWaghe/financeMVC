@@ -15,27 +15,26 @@ const userSlice = createSlice({
     login: (state, action) => {
       console.log("Action payload:", action.payload);
 
-      // Assuming action.payload has the structure { userName, userPassword }
+
       const { userName, userPassword } = action.payload;
 
-      // Update the user state with the provided data
       state.user = {
         userName,
         userPassword,
-        // You can add other user-related properties here if needed
+
       };
     },
     signup: (state, action) => {
       console.log("Action payload:", action.payload);
 
-      // Assuming action.payload has the structure { userName, userPassword }
+
       const { userName, userPassword } = action.payload;
 
       // Update the user state with the provided data
       state.user = {
         userName,
         userPassword,
-        // You can add other user-related properties here if needed
+
       };
     },
     setBillAlertStatus: (state, action) => {
