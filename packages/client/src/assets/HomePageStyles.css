@@ -10,7 +10,7 @@ General Styles body {
 
 .Model {
   z-index: 5;
-  position: fixed; /* Set position to absolute for proper stacking */
+  position: fixed; 
   top: 0;
   left: 0;
   right: 0;
@@ -24,7 +24,7 @@ General Styles body {
 
 .SideNavBarInHomePage {
   z-index: 6;
-  position: fixed; /* Set position to absolute for proper stacking */
+  position: fixed; 
   top: 0;
   left: 0;
   right: 0;
@@ -109,7 +109,7 @@ General Styles body {
 }
 
 .explore-button:hover {
-  background-color: #45a049; /* Darker green on hover */
+  background-color: #45a049; 
 }
 
 /* Responsive Styles */
@@ -122,7 +122,7 @@ General Styles body {
     width: 100%;
     height: auto;
     position: relative;
-    box-shadow: none; /* Remove box-shadow on small screens */
+    box-shadow: none; 
   }
 
   .content {
