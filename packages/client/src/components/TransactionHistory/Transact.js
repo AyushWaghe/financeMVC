@@ -263,6 +263,7 @@ function Transact() {
           <div className="ApplyButton">
             <button onClick={handleAppliedMonthFilter}>Apply</button>
           </div>
+              (If no date selected for saving transaction, then transaction gets saved on todays date)
         </div>
 
       </div>
