@@ -21,7 +21,6 @@
 }
 
 .SideNavBarField {
-  /* Your styles for sidebar fields */
   border-radius: 5%;
   padding-left: 5%;
   font-size: 120%;
@@ -53,11 +52,10 @@
 }
 
 .icon {
-  margin-right: 10px; /* Adjust the margin as needed */
+  margin-right: 10px; 
 }
 
 .text {
-  font-size: 16px; /* Adjust the font size as needed */
-  /* Add any other text styles here */
+  font-size: 16px; 
 }
 
