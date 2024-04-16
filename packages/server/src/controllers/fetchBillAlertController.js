@@ -14,7 +14,6 @@ const fetchBillAlertController = async (req, res) => {
         }
 
         let alertBills = user.bills.filter(bill => {
-            // Convert billDueDate string to Date object
             const billDueDate = new Date(bill.billDueDate);
             return billDueDate <= threeDaysFromNow && billDueDate>=todaysDate ;
         });
