@@ -1,4 +1,7 @@
 # financeMVC
+Live link-:
+https://financialtracker-1sbv.onrender.com/
+
 1)To run the application locally run the following two commands in the root folder 
    a)npm install 
    b)yarn start
@@ -7,8 +10,7 @@
 **username**-:ayushashish.waghe2021@vitstudent.ac.in 
 **password**-:321
 
-3)Live link-:
-https://financialtracker-1sbv.onrender.com/
+
 
 
 3)Teach Stack used-:MongoDB, Node js, Redux, Express js, React,
