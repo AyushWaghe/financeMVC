@@ -2,26 +2,10 @@ import React, { useState, useEffect } from 'react';
 import Field from './Field';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import './TransactionHistory.css';
-import { Navigate } from 'react-router-dom';
 import SideNavBar from '../SideNavBar/SideNavBar';
 
 function Transact() {
-
-  // if (user?.user?.userName) {
-  //   userName = user.user.userName;
-  //   console.log("UserName:", userName);
-  // } else {
-  //   navigate("./Graphs");
-  //   alert("Please login/Signup to continue");
-  // }
-
-  const navigate = useNavigate();
-  const user = useSelector(state => state.user);
-  console.log("User object:", user);
-
-  let userName;
 
   const [navBarisToggle, setNavBarisToggle] = useState(false);
 
@@ -45,9 +29,8 @@ function Transact() {
     setNavBarisToggle(!navBarisToggle);
   }
 
-  
-
-
+  const user = useSelector((state) => state.user);
+  const userName = user.user.userName;
 
   let monthsMap = new Map();
   monthsMap.set("01", "January");
@@ -191,7 +174,6 @@ function Transact() {
   }, []);
 
   // console.log("Halala",monthToBeSendToFieldComponent);
-
 
   return (
     <div className="transaction-history-container">
