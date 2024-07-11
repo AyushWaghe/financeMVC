@@ -75,6 +75,11 @@ General Styles body {
   align-items: center;
   column-gap: 10px;
   width: 100%;
+
+  @media only screen and (max-width:600px) {
+    flex-direction: column;
+    row-gap: 50px;
+  }
 }
 
 /* HomePageCards Styles */
@@ -88,6 +93,12 @@ General Styles body {
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   position: relative; /* Added position relative for button positioning */
+  
+  @media only screen and (max-width:600px) {
+    width: 70%;
+    height: 70%;
+    padding: 5%;
+  }
 }
 
 .HomePageCards h2 {
@@ -113,19 +124,8 @@ General Styles body {
 }
 
 /* Responsive Styles */
-@media screen and (max-width: 700px) {
-  .home-container {
-    flex-direction: column;
-  }
 
-  .sidebar {
-    width: 100%;
-    height: auto;
-    position: relative;
-    box-shadow: none; 
-  }
-
-  .content {
-    margin-left: 0;
-  }
+.Homa{
+  position: absolute;
+  /* height: 100%; */
 }

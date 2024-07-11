@@ -13,6 +13,11 @@
   transition: transform 0.3s ease;
   transform: translateX(-250px); /* Initially hidden */
   z-index: 6;
+
+  @media only screen and (max-width: 600px){
+    transform: translateX(-250px);
+    /* height: 10000px; */
+  }
 }
 
 .sidebar.open {
@@ -21,6 +26,7 @@
 }
 
 .SideNavBarField {
+  background-color: #d3d2d293;
   border-radius: 5%;
   padding-left: 5%;
   font-size: 120%;
@@ -58,4 +64,3 @@
 .text {
   font-size: 16px; 
 }
-

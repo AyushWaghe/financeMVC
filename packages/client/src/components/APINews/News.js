@@ -1,5 +1,5 @@
 import React from "react";
-import '../../assets/APINews.css';
+import './APINews.css';
 
 const News = ({ title, author, sourceName, url }) => {
   const goToArticle = () => {

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHistory, faNewspaper, faChartLine, faBell, faList, faHome } from '@fortawesome/free-solid-svg-icons';
-import '../../assets/SideNavBar.css';
+import './SideNavBar.css';
 
 const SideNavBar = ({ isToggle }) => {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ const SideNavBar = ({ isToggle }) => {
 
   return (
     <div className={`sidebar ${isOpen ? 'open' : ''}`}>
-      <h2>My App</h2>
+      <h2>Savings Saga.</h2>
       <div className="SideNavBarField" onClick={() => navigate("/Transact")}>
         <FontAwesomeIcon icon={faHistory} className="icon" /> <span className="text">Transaction history</span>
       </div>

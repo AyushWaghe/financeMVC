@@ -3,16 +3,32 @@
     height: 700px;
     width: 100%;
     display: grid;
+
+    @media only screen and (max-width: 600px) {
+      height: 600px;
+    }
 }
 .mydiv{
     display: flex;
     flex-direction: row;
+
+    @media only screen and (max-width: 600px) {
+      flex-direction: column;
+      width: 100%;
+      /* font-size: 1px; */
+    }
 }
 
 .DivHeader{
     font-size: 50px;
     color: #20cd8d;
     margin-bottom: 1%;
+
+    
+    @media only screen and (max-width: 600px) {
+      font-size: 40px;
+    }
+    
 }
 
 .inputForm{
@@ -23,10 +39,23 @@
     margin-top:1%;
     width: 50vh;
     margin-left: 5%;
+
+    
+    @media only screen and (max-width: 600px) {
+      width: 100%;
+      padding: 1%;
+      /* margin-left: 5%; */
+      /* margin-top:1%; */
+    }
 }
 
 .Heading{
     font-size: 40px;
+
+    
+    @media only screen and (max-width: 600px) {
+      font-size: 25px;
+    }
 }
 
 .input {
@@ -37,8 +66,12 @@
     background-color: transparent; 
     padding: 10px; 
     border-radius: 5px; 
-    width: 100%; 
     box-sizing: border-box; 
+
+    
+    @media only screen and (max-width: 600px) {
+      width: 90%;
+    }
 }
 
 
@@ -52,6 +85,11 @@
     background-color: black;
     display: flex;
     flex-direction: column;
+
+    @media only screen and (max-width:600px){
+      flex-direction: column;
+      height: 800px;
+    }
 }
 
 .mydiv4{
@@ -59,6 +97,12 @@
     display: grid;
     grid-template-rows:100px 200px 200px 200px ;
     row-gap: 5px;
+
+    @media only screen and (max-width:600px){
+      grid-template-rows:100px 200px 200px 200px ;
+      height: 800px;
+      /* background-color: rebeccapurple; */
+    }
 }
 
 .Header{
@@ -68,6 +112,11 @@
     color: #20cd8d;
     font-family: 'Nunito';
     font-weight: bold;
+
+    @media only screen and (max-width: 600px){
+      font-size: 40px;
+      width: 100%;
+    }
 }
 
 .Set{
@@ -87,6 +136,11 @@
     height: 200px;
     width: 400px;
 
+    @media  only screen and (max-width:600px) {
+      width: 100%;
+
+      /* margin-top: 5%; */
+    }
 
 }
 .Heads{
@@ -105,6 +159,11 @@
     display: grid;
     grid-template-rows: 1fr 1fr 1fr 1fr;
     row-gap: 0px;
+
+    @media only screen and (max-width: 600px) {
+      height: 1650px;
+    }
+    
 }
 
  .mydiv2{
@@ -115,6 +174,10 @@
     align-items: center;
     column-gap: 50px;
 
+    @media only screen and (max-width: 600px) {
+      flex-direction: column;
+    }
+
  }
 
 .TitleHeader {
@@ -123,6 +186,13 @@
     font-family: 'Nunito', sans-serif;
     margin-top: 300px;
     font-weight: bold;
+
+    @media only screen and (max-width: 600px) {
+      font-size: 60px;
+      margin-top: 5%;
+      margin-left: 20%;
+      text-align: center;
+    }
     
 }
 
@@ -137,21 +207,40 @@
 }
 
 .TitleImage{
-    width: 100%;
-    height: 100%;
+    /* width: 100%; */
+    /* height: 100%; */
     /* background-color: rebeccapurple; */
+}
+
+.ActualTitleImage{
+  width: 600px;
+  height: 500px;
+
+  @media only screen and (max-width: 600px) {
+    width: 300px;
+    height: 300px;
+  }
 }
 
 .paragraphStyle{
     /* display: inline; */
     margin-left: 150px;
     margin-top: -100px;
+
+    @media only screen and (max-width: 600px) {
+      margin: 0px;
+    }
+    
 }
 
 .paragraphStyle2 {
     /* display: inline; */
     margin-top: -40px;
     margin-left: 70px;
+
+    @media only screen and (max-width: 600px) {
+      margin: 0px;
+    }
 }
 
 .ButtonDiv{
@@ -161,21 +250,52 @@
     margin-top: 50px;
     margin-left: 150px;
     font-family: 'Nunito';
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    @media only screen and (max-width: 600px) {
+     margin: 0px;
+     margin-top: 15%;
+    }
     /* background-color: red; */
 }
 
-.SignButton, .LoginButton{
-    font-family: 'Nunito', sans-serif;
-    font-size: 35px;
-    border-radius: 50px;
-    background-color: #20cd8d;
-    border: none;
-    font-family: 'Nunito';
+.SignButton, .LoginButton {
+  font-family: 'Nunito', sans-serif;
+  font-size: 35px;
+  border-radius: 50px;
+  background-color: #20cd8d;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  display: inline-block;
+  text-decoration: none;
 }
-.SignButton{
-    color: white;
-    background-color: #182527;
+
+.SignButton:hover {
+  background-color: #17a87c;
+  transform: translateY(-2px);
 }
+
+.LoginButton:hover {
+  background-color: #182527;
+  border: 1px solid white;
+  transform: translateY(-2px);
+}
+
+.SignButton {
+  background-color: #182527;
+}
+
+@media only screen and (max-width: 600px) {
+  .SignButton, .LoginButton {
+      font-size: 30px;
+      padding: 10px 20px;
+  }
+}
+
 
 .Block {
     height: 35%;
@@ -192,6 +312,25 @@
     margin-bottom: 20px;
     cursor: pointer;
     overflow: hidden; 
+    
+    @media only screen and (max-width: 600px) {
+      height: 150px;
+      width: 100px;
+    }
+  }
+  
+  .Set{
+    @media only screen and (max-width: 600px) {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      column-gap: 10%;
+      row-gap: 10%;
+      /* margin-top: 5%; */
+      font-size: 13px;
+      /* margin-bottom: 5%; */
+    }
   }
   
   .Ti{
@@ -222,9 +361,15 @@
 .ImageLeftContentRight, .ImageRightContentLeft{
     height: 350px;
     width: 100%;
-    /* background-color: red; */
     display: flex;
     flex-direction: row;
+
+    @media only screen and (max-width: 600px) {
+      display: flex;
+      flex-direction: column;
+      height: 50px;
+    }
+    
 }
 
 
@@ -236,6 +381,11 @@
     padding: 50px;
     padding-top: 90px;
 
+    @media only screen and (max-width: 600px) {
+      padding: 10px;
+      width: 100%;
+    }
+
 }
 .ContentLeft{
     text-align: right;
@@ -245,16 +395,37 @@
     text-align: left;
     font-size: 50px;
     margin: 0px;
+
+    @media only screen and (max-width: 600px) {
+      font-size: 25px;
+      text-align: center;
+    }
+
 }
 .ContentText, .ContentTextRight{
     font-family: 'Nunito';
     text-align: left;
     margin: 0px;
     font-size: 25px;
+
+    @media only screen and (max-width: 600px) {
+      text-align: center;
+      font-size: 20px;
+      margin-right: 5%;
+    }
+
 }
 .Image{
     height: 350px;
     width: 50%;
+    @media only screen and (max-width: 600px) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      margin-top: 1%;
+    }
+
     /* background-color: black; */
 }
 
@@ -332,9 +503,98 @@ form {
   }
   
 
+  .moneyTrack{
+    height: 45vh;
+    margin-bottom: 5%;
+    width: 95%;
+    border-radius: 5px;
 
+    @media  only screen and (max-width:600px) {
+      height: 30vh;
+      width: 50vh;
+    }
+  }
 
+  .wisdom{
+    border-radius: 10px;
+    width: 90%;
 
+    @media  only screen and (max-width:600px) {
+      height: 30vh;
+      width: 50vh;
+    }
+  }
 
+  .visualise{
+    margin-top: 8%;
+    width: 90%;
+    height: 90%;
+    border-radius: 10px;
 
+    @media  only screen and (max-width:600px) {
+      height: 30vh;
+      width: 50vh;
+      margin-top: 0%;
+    }
 
+  }
+
+  .dreams{
+    height: 80%;
+    margin-top: 5%;
+    width: 90%;
+    border-radius: 10px;
+
+    @media  only screen and (max-width:600px) {
+      height: 30vh;
+      width: 50vh;
+    }
+
+  }
+
+  .InvestmentTracking{
+    @media only screen and (max-width:600px) {
+      margin-top: 25%;
+      margin-bottom: 15%;
+    }
+  }
+
+  .DataEnc{
+    @media only screen and (max-width:600px) {
+      margin-top: 10%;
+    }
+  }
+
+  .infoContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
+    @media only screen and (max-width:600px){
+      flex-direction: column;
+    }
+  }
+
+  .Contact{
+    @media only screen and (max-width:600px){
+      width: 100%;
+    }
+  }
+
+  .ContactSubmit {
+    margin-top: 5%;
+    width: 40%;
+    padding: 1%;
+    font-size: 20px;
+    background-color: green;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 10px;
+}
+
+.ContactSubmit:hover {
+    background-color: darkgreen;
+}

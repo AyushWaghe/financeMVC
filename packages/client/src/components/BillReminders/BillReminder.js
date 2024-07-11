@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import '../../assets/BillReminderPage.css';
+import './BillReminderPage.css';
 import BillField from './BillField.js';
 import axios from "axios";
 import { useSelector } from 'react-redux';

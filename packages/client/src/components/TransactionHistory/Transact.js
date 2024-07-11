@@ -2,10 +2,26 @@ import React, { useState, useEffect } from 'react';
 import Field from './Field';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-import '../../assets/TransactionHistory.css';
+import { useNavigate } from 'react-router-dom';
+import './TransactionHistory.css';
+import { Navigate } from 'react-router-dom';
 import SideNavBar from '../SideNavBar/SideNavBar';
 
 function Transact() {
+
+  // if (user?.user?.userName) {
+  //   userName = user.user.userName;
+  //   console.log("UserName:", userName);
+  // } else {
+  //   navigate("./Graphs");
+  //   alert("Please login/Signup to continue");
+  // }
+
+  const navigate = useNavigate();
+  const user = useSelector(state => state.user);
+  console.log("User object:", user);
+
+  let userName;
 
   const [navBarisToggle, setNavBarisToggle] = useState(false);
 
@@ -29,8 +45,9 @@ function Transact() {
     setNavBarisToggle(!navBarisToggle);
   }
 
-  const user = useSelector((state) => state.user);
-  const userName = user.user.userName;
+  
+
+
 
   let monthsMap = new Map();
   monthsMap.set("01", "January");
@@ -187,7 +204,7 @@ function Transact() {
       {navBarisToggle && <div className="Model"></div>}
       <div className="card2">
         <h2>Transaction History</h2>
-        <div className="input-area">
+        <div className="">
           <form className="transaction-form" onSubmit={handleSubmit}>
             <div className="form-row">
               <label htmlFor="description">Description:</label>
@@ -261,9 +278,9 @@ function Transact() {
           </select>
 
           <div className="ApplyButton">
-            <button onClick={handleAppliedMonthFilter}>Apply</button>
+            <button onClick={handleAppliedMonthFilter}>Apply filter</button>
           </div>
-              (If no date selected for saving transaction, then transaction gets saved on todays date)
+          (If no date selected for saving transaction, then transaction gets saved on todays date)
         </div>
 
       </div>

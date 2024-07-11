@@ -10,7 +10,7 @@ const MainDiv = () => {
   return (
     <div className='MainPageMasterDiv'>
        <Div1 />
-       <Div2 />
+       {/* <Div2 /> */}
        <Div3 />
        <Div4 />
        <Div5 />

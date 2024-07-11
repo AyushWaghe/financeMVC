@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Bar, Pie } from 'react-chartjs-2';
 import { useSelector } from 'react-redux';
 import fetchTransactions from '../Functions/fetchTransaction.js';
-import '../../assets/GraphStyles.css';
+import './GraphStyles.css';
 import Chart from 'chart.js/auto';
 import SideNavBar from '../SideNavBar/SideNavBar';
 

@@ -46,6 +46,10 @@
     font-size: 40px;
     font-weight: bold;
     margin: 1%;
+
+    @media screen and (max-width:600px){
+      font-size: 25px;
+    }
 }
 
 

@@ -35,7 +35,7 @@ function Div1() {
                 </div>
             </div>
             <div className="TitleImage">
-                <img src={img1} alt="Title" style={{ width: "600px", height: "500px" }}  />
+                <img src={img1} alt="Title" className="ActualTitleImage"/>
             </div>
         </div>
            

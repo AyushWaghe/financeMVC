@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SideNavBar from '../SideNavBar/SideNavBar';
-import '../../assets/HomePageStyles.css';
+import './HomePageStyles.css'
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import BillAlert from '../BillAlert/BillAlert';
@@ -58,7 +58,7 @@ function Home() {
   const navigate = useNavigate();
   return (
     <div className="home-container">
-      <div >
+      <div className='Homa'>
         <SideNavBar
           isToggle={setNavBarTogggle}
         />
