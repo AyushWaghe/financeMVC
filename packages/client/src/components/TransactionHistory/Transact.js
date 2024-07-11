@@ -244,7 +244,7 @@ function Transact() {
             onChange={(e) => setAppliedMonth(e.target.value)}
           >
             <option value="">Select a month</option>
-            <option value="All">All</option>
+            // <option value="All">All</option>
             <option value="January">January</option>
             <option value="February">February</option>
             <option value="March">March</option>
