@@ -80,7 +80,7 @@ function Login() {
         <button type="submit" className="login-button" onClick={handleLogin} disabled={loading}>
           {loading ? "Logging in, please wait..." : "Login"}
         </button>
-        {error && <div className="error-message">{error}</div>} {/* Display error message if present */}
+        {error && <div className="error-message">{error}</div>} 
       </form>
     </div>
   );

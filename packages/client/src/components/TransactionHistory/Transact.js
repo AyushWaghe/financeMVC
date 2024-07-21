@@ -7,31 +7,7 @@ import SideNavBar from '../SideNavBar/SideNavBar';
 
 function Transact() {
 
-  const [navBarisToggle, setNavBarisToggle] = useState(false);
-
-  const [transactions, setTransactions] = useState([]);
-  const [monthTotal, setMonthTotal] = useState('');
-  const [description, setDescription] = useState('');
-  const [cost, setCost] = useState('');
-  const [date, setDate] = useState('');
-  const [prevMonth, setPrevMonth] = useState('');
-  const [isUpdating, setIsUpdating] = useState(false);
-  const [currentTransactionId, setCurrentTransactionId] = useState(null);
-  const MonthNumber = formatDate(Date.now()).substring(5, 7);
-  var Month = null;
-  const [appliedMonth, setAppliedMonth] = useState(null);
-  const [hasApplied, setHasApplied] = useState(false);
-  var todaysDate;
-  const [monthToBeSendToFieldComponent, setMonthToBeSentTo] = useState('');
-
-
-  const setNavBarTogggle = () => {
-    setNavBarisToggle(!navBarisToggle);
-  }
-
-  const user = useSelector((state) => state.user);
-  const userName = user.user.userName;
-
+  
   let monthsMap = new Map();
   monthsMap.set("01", "January");
   monthsMap.set("02", "February");
@@ -46,6 +22,33 @@ function Transact() {
   monthsMap.set("11", "November");
   monthsMap.set("12", "December");
 
+  const [navBarisToggle, setNavBarisToggle] = useState(false);
+
+  const [transactions, setTransactions] = useState([]);
+  const [monthTotal, setMonthTotal] = useState('');
+  const [description, setDescription] = useState('');
+  const [cost, setCost] = useState('');
+  const [date, setDate] = useState('');
+  const [prevMonth, setPrevMonth] = useState('');
+  const [isUpdating, setIsUpdating] = useState(false);
+  const [currentTransactionId, setCurrentTransactionId] = useState(null);
+  const MonthNumber = formatDate(Date.now()).substring(5, 7);
+  let [Month,setMonth]=useState(monthsMap.get(MonthNumber));
+  // var Month = null;
+  const [appliedMonth, setAppliedMonth] = useState(null);
+  const [hasApplied, setHasApplied] = useState(false);
+  var todaysDate;
+  const [monthToBeSendToFieldComponent, setMonthToBeSentTo] = useState('');
+
+
+  const setNavBarTogggle = () => {
+    setNavBarisToggle(!navBarisToggle);
+  }
+
+  const user = useSelector((state) => state.user);
+  const userName = user.user.userName;
+
+
 
   function formatDate(inputDate) {
     const currentDate = inputDate ? new Date(inputDate) : new Date();
@@ -57,23 +60,11 @@ function Transact() {
   }
 
   const fetchTransactions = async () => {
-    // setMonth(monthsMap.get(MonthNumber));
-    Month = monthsMap.get(MonthNumber);
-    // console.log("RHis Month:",Month);
     try {
-      if (hasApplied) {
-        // console.log("Applied");
-        const response = await axios.get(`https://financemvc.onrender.com/fetchTransactions/fetch?userName=${userName}&month=${appliedMonth}`);
+        const response = await axios.get(`https://financemvc.onrender.com/transactionOperation/fetch?userName=${userName}&month=${Month}`);
         setTransactions(response.data.transactions);
         setMonthTotal(response.data.monthTotal);
-        console.log("Transactions:", response.data.transactions);
-      } else {
-        // console.log("Not appleid");
-        const response = await axios.get(`https://financemvc.onrender.com/fetchTransactions/fetch?userName=${userName}&month=${Month}`);
-        setTransactions(response.data.transactions);
-        setMonthTotal(response.data.monthTotal);
-        console.log("Transactions:", response.data.transactions);
-      }
+        // console.log("Transactions:", response.data.transactions);
       // console.log("Transactions:",transactions);
     } catch (error) {
       console.error('Error fetching transactions:', error.message);
@@ -84,8 +75,6 @@ function Transact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    setHasApplied(false);
 
     let dateToUse = date || todaysDate;
 
@@ -105,12 +94,12 @@ function Transact() {
       prevMonth: prevMonth,
     };
 
-    console.log("Transaction Data is:", transactionData);
+    // console.log("Transaction Data is:", transactionData);
 
     if (isUpdating) {
-      console.log("Updating data", transactionData);
+      // console.log("Updating data", transactionData);
       try {
-        await axios.post(`https://financemvc.onrender.com/getTransactionAndStoreThem/updateTransaction`, null, {
+        await axios.post(`https://financemvc.onrender.com/transactionOperation/updateTransaction`, null, {
           params: {
             ...transactionData,
             id: currentTransactionId,
@@ -123,7 +112,7 @@ function Transact() {
       }
     } else {
       try {
-        await axios.post('https://financemvc.onrender.com/getTransactionAndStoreThem/saveTransaction', transactionData);
+        await axios.post('https://financemvc.onrender.com/transactionOperation/saveTransaction', transactionData);
       } catch (error) {
         console.error('Error creating transaction:', error.message);
       }
@@ -136,9 +125,7 @@ function Transact() {
   };
 
   const handleAppliedMonthFilter = async (e) => {
-    setHasApplied(true);
-    setMonthToBeSentTo(appliedMonth);
-    fetchTransactions();
+    setMonth(appliedMonth);
   }
 
   const handleEdit = (transactionId) => {
@@ -171,7 +158,7 @@ function Transact() {
 
   useEffect(() => {
     fetchTransactions();
-  }, []);
+  }, [Month]);
 
   // console.log("Halala",monthToBeSendToFieldComponent);
 
@@ -240,11 +227,11 @@ function Transact() {
             id="month"
             name="month"
             className="input-field"
-            value={Month}
+            // value={Month}
             onChange={(e) => setAppliedMonth(e.target.value)}
           >
             <option value="">Select a month</option>
-            // <option value="All">All</option>
+            <option value="All">All</option>
             <option value="January">January</option>
             <option value="February">February</option>
             <option value="March">March</option>
@@ -267,7 +254,7 @@ function Transact() {
 
       </div>
       <Field
-        Month={monthToBeSendToFieldComponent}
+        Month={Month}
         transactions={transactions}
         onDelete={fetchTransactions}
         onEdit={handleEdit}
