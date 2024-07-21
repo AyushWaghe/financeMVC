@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import News from './News';
 import axios from 'axios';
-import '../../assets/Main.css';
+import './Main.css';
 import SideNavBar from '../SideNavBar/SideNavBar';
 
 const Main = () => {

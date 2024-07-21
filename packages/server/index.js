@@ -1,9 +1,7 @@
 const registerRoute = require('./src/routes/registerRoute.js');
-const saveTransactionRoute = require('./src/routes/saveTransactionRoute.js');
-const fetchTransactionsRoute = require('./src/routes/fetchTransactionRoute.js');
-const deleteTransactionRoute = require('./src/routes/deleteTransactionRoute.js');
 const billReminderRoute = require('./src/routes/billReminderRoute.js');
 const {connectDB}=require('./dbConfig/db.js');
+const transactionOperationsRoute=require('./src/routes/transactionOperationsRoute.js')
 
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -18,11 +16,13 @@ connectDB();
 app.use(cors());
 app.use(bodyParser.json());
 
-//Transaction routes
+//Authentication route
+
 app.use('/register',registerRoute);
-app.use('/getTransactionAndStoreThem',saveTransactionRoute);
-app.use('/fetchTransactions',fetchTransactionsRoute);
-app.use('/deleteTransaction',deleteTransactionRoute);
+
+
+//Transaction routes
+app.use('/transactionOperation',transactionOperationsRoute);
 
 //Bill rountes 
 app.use('/BillReminders',billReminderRoute);

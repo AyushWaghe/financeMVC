@@ -10,6 +10,8 @@
     justify-content: center;
     align-items: center;
 
+
+
 }
 
 .BarGraph{
@@ -20,6 +22,12 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
     padding: 20px;
+
+    @media only screen and (max-width:600px){
+      /* margin-left: 100px; */
+      width: 90%;
+      padding: 19px;
+    }
 }
   /* Hover effect - scale the card on hover */
   .BarGraph:hover {
@@ -32,10 +40,20 @@
     justify-content: center;
     align-items: center;
     column-gap: 250px;
+
+    @media only screen and (max-width:600px){
+      flex-direction: column;
+    }
   }
 
   .GraphTitle{
     font-weight: bold;
-
   }
+
+  .PieGraph{
+    @media only screen and (max-width:600px){
+      margin-top: 15%;
+    }
+  }
+
   

@@ -1,6 +1,11 @@
 /* Field.css */
 .field-container {
     margin: 20px;
+    width: 100%;
+    @media only screen and (max-width: 600px) {
+      margin-left: 20px;
+      width: 115%;
+    }
   }
   
   .field-table {

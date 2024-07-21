@@ -1,12 +1,12 @@
 import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell, faMoneyCheckAlt, faChartLine, faShieldAlt, faHistory } from '@fortawesome/free-solid-svg-icons';
-import '../../assets/SideNavBar.css';
+
 
 function Div4() {
   return (
     <div className="mydiv4">
-      <div className="UniqueFeatures">
+      <div>
         <h1 className="Header">Unique Features</h1>
       </div>
 
@@ -23,13 +23,13 @@ function Div4() {
         </div>
       </div>
       <div className="Set">
-        <div className="UniqueContent">
-          <FontAwesomeIcon icon={faChartLine} size="3x" className="icon zoom" />
+        <div className="UniqueContent InvestmentTracking">
+          <FontAwesomeIcon icon={faChartLine} size="3x" className="icon zoom investmentTracking" />
           <h1 className="Heads">Investment tracking</h1>
           <p className="HeadsContent">Watch Your Wealth Grow: Effortlessly Track Your Investments with Precision and Confidence!</p>
         </div>
       </div>
-      <div className="Set">
+      <div className="Set DataEnc">
         <div className="UniqueContent">
           <FontAwesomeIcon icon={faShieldAlt} size="3x" className="icon zoom" />
           <h1 className="Heads">Data encryption</h1>
