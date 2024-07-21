@@ -1,9 +1,9 @@
 const express =require('express');
 const transactionOperationsController=require('../controllers/transactionOperationsController.js');
-//router object
+
 const router= express.Router();
 
-//LOGIN || POST
+//Transaction operations CRUD
 router.post('/saveTransaction',transactionOperationsController.saveTransaction);
 router.post('/updateTransaction',transactionOperationsController.updateTransaction);
 router.get('/fetch',transactionOperationsController.fetchTransaction);
