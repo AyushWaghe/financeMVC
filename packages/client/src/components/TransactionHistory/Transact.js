@@ -1,73 +1,140 @@
-import React, { useState, useEffect } from 'react';
-import Field from './Field';
+import React, { useState } from 'react';
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import Field from './Field';
 import axios from 'axios';
 import './TransactionHistory.css';
 import SideNavBar from '../SideNavBar/SideNavBar';
+import api from '../../api/AxiosConfig';
+
 
 function Transact() {
-
-  
-  let monthsMap = new Map();
-  monthsMap.set("01", "January");
-  monthsMap.set("02", "February");
-  monthsMap.set("03", "March");
-  monthsMap.set("04", "April");
-  monthsMap.set("05", "May");
-  monthsMap.set("06", "June");
-  monthsMap.set("07", "July");
-  monthsMap.set("08", "August");
-  monthsMap.set("09", "September");
-  monthsMap.set("10", "October");
-  monthsMap.set("11", "November");
-  monthsMap.set("12", "December");
+  const months = [
+    { value: 1, label: "January" },
+    { value: 2, label: "February" },
+    { value: 3, label: "March" },
+    { value: 4, label: "April" },
+    { value: 5, label: "May" },
+    { value: 6, label: "June" },
+    { value: 7, label: "July" },
+    { value: 8, label: "August" },
+    { value: 9, label: "September" },
+    { value: 10, label: "October" },
+    { value: 11, label: "November" },
+    { value: 12, label: "December" }
+  ];
 
   const [navBarisToggle, setNavBarisToggle] = useState(false);
 
   const [transactions, setTransactions] = useState([]);
   const [monthTotal, setMonthTotal] = useState('');
+  const [monthStats, setMonthStats] = useState({
+    totalIncome: 0,
+    totalExpense: 0,
+    totalNeedsExpense: 0,
+    totalWantsExpense: 0,
+    totalSavings: 0
+  });
+
   const [description, setDescription] = useState('');
+  const [category, setCategory] = useState('');
+  const [transactionType, setTransactionType] = useState("EXPENSE");
+  const [title, setTitle] = useState('');
   const [cost, setCost] = useState('');
   const [date, setDate] = useState('');
-  const [prevMonth, setPrevMonth] = useState('');
+
+  const [transactionsError, setTransactionsError] = useState("");
+  const [statsError, setStatsError] = useState("");
+
+  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
+  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+  const [finalSelectedYear, setFinalSelectedYear] = useState(new Date().getFullYear());
+
   const [isUpdating, setIsUpdating] = useState(false);
   const [currentTransactionId, setCurrentTransactionId] = useState(null);
-  const MonthNumber = formatDate(Date.now()).substring(5, 7);
-  let [Month,setMonth]=useState(monthsMap.get(MonthNumber));
-  // var Month = null;
-  const [appliedMonth, setAppliedMonth] = useState(null);
-  const [hasApplied, setHasApplied] = useState(false);
-  var todaysDate;
-  const [monthToBeSendToFieldComponent, setMonthToBeSentTo] = useState('');
+  const [spendingType, setSpendingType] = useState('NEEDS');
 
+  const user = useSelector((state) => state.user);
+  const userId = user.user.userId;
+
+  const [selectedMonthName, setSelectedMonthName] = useState(months.find((month) => month.value === new Date().getMonth() + 1)?.label);
 
   const setNavBarTogggle = () => {
     setNavBarisToggle(!navBarisToggle);
-  }
+  };
 
-  const user = useSelector((state) => state.user);
-  const userName = user.user.userName;
-
-
-
-  function formatDate(inputDate) {
+  const formatDate = (inputDate) => {
     const currentDate = inputDate ? new Date(inputDate) : new Date();
+
+    if (isNaN(currentDate.getTime())) return '';
+
     const day = String(currentDate.getDate()).padStart(2, '0');
     const month = String(currentDate.getMonth() + 1).padStart(2, '0');
     const year = currentDate.getFullYear();
 
     return `${year}-${month}-${day}`;
-  }
+  };
+
+  const formatAmount = (amount) => {
+    return Number(amount || 0).toLocaleString("en-IN", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+  };
+
+  const handleTransactionTypeChange = (e) => {
+    const selectedType = e.target.value;
+
+    setTransactionType(selectedType);
+
+    if (selectedType === "INCOME") {
+      setSpendingType("NA");
+    } else {
+      setSpendingType("NEEDS");
+    }
+  };
 
   const fetchTransactions = async () => {
+    const month = parseInt(selectedMonth);
+    const year = parseInt(selectedYear);
+
+    setTransactionsError("");
+    setStatsError("");
+
     try {
-        const response = await axios.get(`https://financemvc.onrender.com/transactionOperation/fetch?userName=${userName}&month=${Month}`);
-        setTransactions(response.data.transactions);
-        setMonthTotal(response.data.monthTotal);
-        // console.log("Transactions:", response.data.transactions);
-      // console.log("Transactions:",transactions);
+      const transactionsResponse = await api.get(
+        `/transactions/monthly?userId=${userId}&month=${month}&year=${year}`,
+        {
+          withCredentials:true //This tells Axios to send and receive cookies. 
+        });
+
+      setTransactions(transactionsResponse.data.data);
+      setMonthTotal(transactionsResponse.data.monthTotal);
     } catch (error) {
       console.error('Error fetching transactions:', error.message);
+      setTransactions([]);
+      setMonthTotal('');
+      setTransactionsError("Unable to fetch transactions for this month.");
+    }
+
+    try {
+      const statsResponse = await api.get(
+        `/analytics/month-stats/user/${userId}?month=${month}&year=${year}`,{
+          withCredentials:true //This tells Axios to send and receive cookies. 
+        }
+      );
+
+      setMonthStats(statsResponse.data.data);
+    } catch (error) {
+      console.error('Error fetching monthly stats:', error.message);
+      setMonthStats({
+        totalIncome: 0,
+        totalExpense: 0,
+        totalNeedsExpense: 0,
+        totalWantsExpense: 0,
+        totalSavings: 0
+      });
+      setStatsError("Unable to fetch monthly stats. Try after some time");
     }
   };
 
@@ -76,43 +143,46 @@ function Transact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    let dateToUse = date || todaysDate;
+    const dateToUse = date ? formatDate(date) : formatDate(Date.now());
 
-    if (date.trim() === '') {
-
-      dateToUse = formatDate(Date.now());
-    }
-
-    var submittedMonthNumber = dateToUse.substring(5, 7);
-    const submittedMonth = monthsMap.get(submittedMonthNumber);
     const transactionData = {
+      userId: userId,
+      title: title,
       description: description,
-      cost: cost,
-      date: dateToUse,
-      userName: userName,
-      newMonth: submittedMonth,
-      prevMonth: prevMonth,
+      amount: cost,
+      category: category,
+      transactionDate: dateToUse,
+      type: transactionType,
+      spendingType: transactionType === "INCOME" ? "NA" : spendingType
     };
 
-    // console.log("Transaction Data is:", transactionData);
-
     if (isUpdating) {
-      // console.log("Updating data", transactionData);
       try {
-        await axios.post(`https://financemvc.onrender.com/transactionOperation/updateTransaction`, null, {
-          params: {
-            ...transactionData,
-            id: currentTransactionId,
-          },
-        });
+        await api.put(
+          `/transactions/${currentTransactionId}`,
+          transactionData,{
+            withCredentials:true //This tells Axios to send and receive cookies. 
+          }
+        );
+
         setIsUpdating(false);
         setCurrentTransactionId(null);
       } catch (error) {
-        console.error('Error updating transaction:', error.message);
+        console.error('Error updating transaction:', error);
       }
     } else {
       try {
-        await axios.post('https://financemvc.onrender.com/transactionOperation/saveTransaction', transactionData);
+        const response = await api.post(
+          '/transactions',
+          transactionData,{
+            withCredentials:true //This tells Axios to send and receive cookies. 
+          }
+        );
+
+        if (!response.data.success) {
+          alert("Something went wrong");
+          throw new Error("Failed to save the transaction");
+        }
       } catch (error) {
         console.error('Error creating transaction:', error.message);
       }
@@ -121,25 +191,40 @@ function Transact() {
     setDescription('');
     setCost('');
     setDate('');
+    setTitle('');
+    setCategory('');
+    setTransactionType("EXPENSE");
+    setSpendingType("NEEDS");
+
     fetchTransactions();
   };
 
-  const handleAppliedMonthFilter = async (e) => {
-    setMonth(appliedMonth);
-  }
+  const handleAppliedMonthFilter = () => {
+    fetchTransactions();
+    setSelectedMonthName(months.find((month) => month.value === selectedMonth)?.label);
+    setFinalSelectedYear(selectedYear);
+  };
+
+  const handleClearFilter = () => {
+    setSelectedMonth(new Date().getMonth() + 1);
+    setSelectedYear(new Date().getFullYear());
+  };
 
   const handleEdit = (transactionId) => {
-    const transaction = transactions.find((t) => t.id === transactionId);
+    const transaction = transactions.find((t) => t.transactionId === transactionId);
+
     if (transaction) {
+      setTitle(transaction.title);
       setDescription(transaction.description);
-      setCost(transaction.cost);
-      setDate(transaction.date);
-      setPrevMonth(monthsMap.get(transaction.date.substring(5, 7))); // Set the prevMonth state with the selected month
+      setCost(transaction.amount);
+      setCategory(transaction.category);
+      setDate(transaction.transactionDate);
       setCurrentTransactionId(transactionId);
+      setTransactionType(transaction.type);
+      setSpendingType(transaction.type === "INCOME" ? "NA" : transaction.spendingType);
       setIsUpdating(true);
     }
   };
-
 
   const handleCancelUpdate = () => {
     setIsUpdating(false);
@@ -147,36 +232,132 @@ function Transact() {
     setDescription('');
     setCost('');
     setDate('');
+    setTitle('');
+    setCategory('');
+    setTransactionType("EXPENSE");
+    setSpendingType("NEEDS");
   };
 
   useEffect(() => {
-    if (!hasApplied) {
-      setAppliedMonth(Month);
-    }
-  }, [hasApplied, Month]);
-
-
-  useEffect(() => {
     fetchTransactions();
-  }, [Month]);
-
-  // console.log("Halala",monthToBeSendToFieldComponent);
+  }, []);
 
   return (
     <div className="transaction-history-container">
-      <div >
-        <SideNavBar
-          isToggle={setNavBarTogggle}
-        />
-      </div>
+      <SideNavBar isToggle={setNavBarTogggle} />
 
       {navBarisToggle && <div className="Model"></div>}
-      <div className="card2">
-        <h2>Transaction History</h2>
-        <div className="">
+
+      {/* <div className="navbar-wrapper">
+        <Navbar
+          onProfileClick={() => navigate("/profile")}
+          onLogout={() => navigate("/login")}
+        />
+      </div> */}
+
+    <div className="page-content">
+       
+
+      <div className="transaction-page">
+        <div className="transaction-header">
+          <div>
+            <h2>Transaction History</h2>
+            <h2>{selectedMonthName} {finalSelectedYear}</h2>
+          </div>
+        </div>
+
+        <div className="stats-grid">
+          <div className="stats-card income-card">
+            <span>Total Income</span>
+            <strong>₹{formatAmount(monthStats.totalIncome)}</strong>
+          </div>
+
+          <div className="stats-card expense-card">
+            <span>Total Expense</span>
+            <strong>₹{formatAmount(monthStats.totalExpense)}</strong>
+          </div>
+
+          <div className="stats-card needs-card">
+            <span>Needs Expense</span>
+            <strong>₹{formatAmount(monthStats.totalNeedsExpense)}</strong>
+          </div>
+
+          <div className="stats-card wants-card">
+            <span>Wants Expense</span>
+            <strong>₹{formatAmount(monthStats.totalWantsExpense)}</strong>
+          </div>
+
+          <div className="stats-card savings-card">
+            <span>Total Savings</span>
+            <strong>₹{formatAmount(monthStats.totalSavings)}</strong>
+          </div>
+        </div>
+
+        {statsError && <p className="error-message">{statsError}</p>}
+
+        <div className="filter-panel">
+          <div className="filter-title">Monthly Filter</div>
+
+          <div className="filter-controls">
+            <div className="form-row">
+              <label htmlFor="selectedMonth">Month</label>
+              <select
+                id="selectedMonth"
+                name="selectedMonth"
+                className="input-field"
+                value={selectedMonth}
+                onChange={(e) => setSelectedMonth(parseInt(e.target.value))}
+              >
+                {months.map((month) => (
+                  <option key={month.value} value={month.value}>
+                    {month.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="form-row">
+              <label htmlFor="selectedYear">Year</label>
+              <input
+                type="number"
+                id="selectedYear"
+                name="selectedYear"
+                className="input-field"
+                value={selectedYear}
+                onChange={(e) => setSelectedYear(parseInt(e.target.value))}
+              />
+            </div>
+
+            <button type="button" className="filter-button" onClick={handleAppliedMonthFilter}>
+              Apply Filter
+            </button>
+
+            <button type="button" className="clear-button" onClick={handleClearFilter}>
+              Clear
+            </button>
+          </div>
+        </div>
+
+        <div className="form-panel">
+          <h3>{isUpdating ? 'Update Transaction' : 'Add Transaction'}</h3>
+
           <form className="transaction-form" onSubmit={handleSubmit}>
             <div className="form-row">
-              <label htmlFor="description">Description:</label>
+              <label htmlFor="title">Title</label>
+              <input
+                type="text"
+                id="title"
+                name="title"
+                className="input-field"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                maxLength={50}
+                required
+              />
+            </div>
+
+            <div className="form-row">
+              <label htmlFor="description">Description</label>
               <input
                 type="text"
                 id="description"
@@ -184,21 +365,28 @@ function Transact() {
                 className="input-field"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
+                maxLength={100}
               />
             </div>
+
             <div className="form-row">
-              <label htmlFor="cost">Cost:</label>
+              <label htmlFor="cost">Amount</label>
               <input
-                type="text"
+                type="number"
                 id="cost"
                 name="cost"
                 className="input-field"
                 value={cost}
                 onChange={(e) => setCost(e.target.value)}
+                min="0.0"
+                max="10000000.0"
+                step="0.01"
+                required
               />
             </div>
+
             <div className="form-row">
-              <label htmlFor="date">Date:</label>
+              <label htmlFor="date">Date</label>
               <input
                 type="date"
                 id="date"
@@ -209,10 +397,54 @@ function Transact() {
               />
             </div>
 
+            <div className="form-row">
+              <label htmlFor="transactionType">Type</label>
+              <select
+                id="transactionType"
+                name="transactionType"
+                className="input-field"
+                value={transactionType}
+                onChange={handleTransactionTypeChange}
+              >
+                <option value="INCOME">INCOME</option>
+                <option value="EXPENSE">EXPENSE</option>
+              </select>
+            </div>
+
+            <div className="form-row">
+              <label htmlFor="category">Category</label>
+              <input
+                id="category"
+                name="category"
+                className="input-field"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                maxLength={25}
+              />
+            </div>
+
+            <div className="form-row">
+              <label htmlFor="spendingType">Spending Type</label>
+              <select
+                id="spendingType"
+                name="spendingType"
+                className="input-field"
+                value={spendingType}
+                onChange={(e) => setSpendingType(e.target.value)}
+                disabled={transactionType === "INCOME"}
+              >
+                {transactionType === "INCOME" && <option value="NA">NA</option>}
+                <option value="NEEDS">NEEDS</option>
+                <option value="WANTS">WANTS</option>
+                <option value="SAVINGS">SAVINGS</option>
+              </select>
+            </div>
+
             <div className="button-container">
               <button type="submit" className="submit-button">
                 {isUpdating ? 'Update' : 'Submit'}
               </button>
+
               {isUpdating && (
                 <button type="button" className="cancel-button" onClick={handleCancelUpdate}>
                   Cancel
@@ -221,46 +453,20 @@ function Transact() {
             </div>
           </form>
         </div>
-        <div className="form-row">
-          <label htmlFor="month">Filter:</label>
-          <select
-            id="month"
-            name="month"
-            className="input-field"
-            // value={Month}
-            onChange={(e) => setAppliedMonth(e.target.value)}
-          >
-            <option value="">Select a month</option>
-            <option value="All">All</option>
-            <option value="January">January</option>
-            <option value="February">February</option>
-            <option value="March">March</option>
-            <option value="April">April</option>
-            <option value="May">May</option>
-            <option value="June">June</option>
-            <option value="July">July</option>
-            <option value="August">August</option>
-            <option value="September">September</option>
-            <option value="October">October</option>
-            <option value="November">November</option>
-            <option value="December">December</option>
-          </select>
 
-          <div className="ApplyButton">
-            <button onClick={handleAppliedMonthFilter}>Apply filter</button>
-          </div>
-          (If no date selected for saving transaction, then transaction gets saved on todays date)
-        </div>
+        {transactionsError && <p className="error-message">{transactionsError}</p>}
 
+        <Field
+          Month={selectedMonthName}
+          transactions={transactions}
+          onDelete={fetchTransactions}
+          onEdit={handleEdit}
+          total={monthTotal}
+          year={finalSelectedYear}
+        />
       </div>
-      <Field
-        Month={Month}
-        transactions={transactions}
-        onDelete={fetchTransactions}
-        onEdit={handleEdit}
-        total={monthTotal}
-      />
     </div>
+     </div>
   );
 }
 

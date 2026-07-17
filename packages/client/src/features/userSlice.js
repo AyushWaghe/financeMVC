@@ -13,28 +13,16 @@ const userSlice = createSlice({
   },
   reducers: {
     login: (state, action) => {
-      console.log("Action payload:", action.payload);
-
-
-      const { userName, userPassword } = action.payload;
-
+      const { userId } = action.payload;
       state.user = {
-        userName,
-        userPassword,
-
+        userId
       };
     },
     signup: (state, action) => {
-      console.log("Action payload:", action.payload);
-
-
-      const { userName, userPassword } = action.payload;
-
+      const { userId } = action.payload;
       // Update the user state with the provided data
       state.user = {
-        userName,
-        userPassword,
-
+        userId
       };
     },
     setBillAlertStatus: (state, action) => {
@@ -42,10 +30,16 @@ const userSlice = createSlice({
   
       state.billAlertStatus = action.payload.alertStatus;
     },
+    logout: (state, action) => {
+      const { userId } = action.payload;
+      state.user = {
+        userId
+      };
+    },
   },
 });
 
-export const { login, signup,setBillAlertStatus } = userSlice.actions;
+export const { login, signup,setBillAlertStatus,logout } = userSlice.actions;
 export const selectUser = (state) => state.user;
 
 export default userSlice.reducer;

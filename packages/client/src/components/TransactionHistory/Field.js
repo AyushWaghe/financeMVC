@@ -2,10 +2,11 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import '../../assets/FieldStyle.css';
+import api from '../../api/AxiosConfig';
 
-function Field({ transactions, onDelete, onEdit, Month,total }) {
+function Field({ transactions, onDelete, onEdit, Month,total,year }) {
+
   const user = useSelector((state) => state.user);
-  const userName = user.user.userName;
 
   let monthsMap = new Map();
   monthsMap.set("01", "January");
@@ -27,12 +28,8 @@ function Field({ transactions, onDelete, onEdit, Month,total }) {
     const Month=monthsMap.get(monthNumber);
     console.log("Month",Month);
     try {
-      await axios.delete('https://financemvc.onrender.com/transactionOperation/delete', {
-        params: {
-          id: id,
-          userName: userName,
-          Month:Month,
-        },
+      await api.delete(`/transactions/${id}`,{
+        withCredentials:true //This tells Axios to send and receive cookies. 
       });
       onDelete();
     } catch (e) {
@@ -43,14 +40,18 @@ function Field({ transactions, onDelete, onEdit, Month,total }) {
   return (
     <div className="field-container">
       <div className="Month">
-        <h1 className="MonthHeader">{Month}</h1>
+        <h1 className="MonthHeader">{Month} {year}</h1>
       </div>
       <table className="field-table">
         <thead>
           <tr>
+            <th>Title</th>
             <th>Description</th>
-            <th>Cost</th>
+            <th>Amount</th>
+            <th>Category</th>
             <th>Date</th>
+            <th>INCOME/EXPENSE</th>
+            <th>Spending Type</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -58,34 +59,30 @@ function Field({ transactions, onDelete, onEdit, Month,total }) {
         <tbody>
           {!transactions || transactions.length === 0 ? (
             <tr>
-              <td colSpan="4">No transactions to display</td>
+              <td colSpan="8">No transactions to display</td>
             </tr>
           ) : (
             transactions &&
             transactions.map((transaction) => (
-              <tr key={transaction.id}>
+              <tr key={transaction.transactionId}>
+                <td>{transaction.title}</td>
                 <td>{transaction.description}</td>
-                <td>{transaction.cost}</td>
-                <td>{transaction.date}</td>
+                <td>{transaction.amount}</td>
+                <td>{transaction.category}</td>
+                <td>{transaction.transactionDate}</td>
+                <td>{transaction.type}</td>
+                <td>{transaction.spendingType}</td>
                 <td>
-                  <button onClick={() => handleDelete(transaction.id,transaction.date)}>
+                  <button onClick={() => handleDelete(transaction.transactionId,transaction.transactionDate)}>
                     Delete
                   </button>
-                  <button onClick={() => onEdit(transaction.id)}>
+                  <button onClick={() => onEdit(transaction.transactionId)}>
                     Update
                   </button>
                 </td>
               </tr>
             ))
           )}
-        </tbody>
-        <tbody>
-            <tr className="TotalSpan">
-              <td>Month Total</td>
-              <td></td>
-              <td></td>
-              <td>{total}</td>
-            </tr>
         </tbody>
       </table>
     </div>

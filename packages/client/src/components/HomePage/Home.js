@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import BillAlert from '../BillAlert/BillAlert';
 import { setBillAlertStatus } from '../../features/userSlice';
+import Navbar from '../NavBar/Navbar';
 
 function Home() {
 
@@ -66,6 +67,8 @@ function Home() {
       </div>
 
       {navBarisToggle && <div className="Model"></div>}
+
+      {/* <Navbar/> */}
 
       <div className="content">
         <div className="content-row">

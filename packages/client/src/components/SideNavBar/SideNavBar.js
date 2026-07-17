@@ -1,49 +1,105 @@
 import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHistory, faNewspaper, faChartLine, faBell, faList, faHome } from '@fortawesome/free-solid-svg-icons';
-import './SideNavBar.css';
+import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faHistory,
+  faNewspaper,
+  faChartLine,
+  faBell,
+  faList,
+  faHome,
+  faUser,
+  faRightFromBracket,
+  faBars,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
+import "./SideNavBar.css";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { logout } from "../../features/userSlice";
 
 const SideNavBar = ({ isToggle }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleToggle = async () => {
-    await setIsOpen(!isOpen);
-    isToggle();
+  const handleToggle = () => {
+    setIsOpen((previousValue) => !previousValue);
+    isToggle?.();
   };
 
+  const handleLogout = async (event) => {
+    event.stopPropagation();
+
+    try {
+      await axios.post(
+        "http://localhost:8082/auth/logout",
+        {},
+        { withCredentials: true }
+      );
+    } finally {
+      dispatch(logout({ userId: null }));
+      navigate("/");
+    }
+  };
+
+  const navigationItems = [
+    { label: "Transaction History", icon: faHistory, path: "/Transact" },
+    { label: "Financial News", icon: faNewspaper, path: "/Main" },
+    { label: "Analytics", icon: faChartLine, path: "/Graphs" },
+    { label: "Bill Reminders", icon: faBell, path: "/BillReminder" },
+    { label: "Bill History", icon: faList, path: "/PastBills" },
+    { label: "Home", icon: faHome, path: "/Home" },
+    { label: "Profile", icon: faUser, path: "/Profile" },
+  ];
+
   return (
-    <div className={`sidebar ${isOpen ? 'open' : ''}`}>
-      <h2>Savings Saga.</h2>
-      <div className="SideNavBarField" onClick={() => navigate("/Transact")}>
-        <FontAwesomeIcon icon={faHistory} className="icon" /> <span className="text">Transaction history</span>
+    <aside className={`sidebar ${isOpen ? "open" : ""}`}>
+      <div className="sidebar-brand">
+        <div className="sidebar-brand-icon">S</div>
+        <div>
+          <h2>Savings Saga</h2>
+          <span>Your finance dashboard</span>
+        </div>
       </div>
 
-      <div className="SideNavBarField" onClick={() => navigate("/Main")}>
-        <FontAwesomeIcon icon={faNewspaper} className="icon" /> <span className="text">Financial News</span>
+      <div className="sidebar-divider" />
+
+      <nav className="sidebar-navigation" aria-label="Main navigation">
+        {navigationItems.map((item) => (
+          <button
+            type="button"
+            className="SideNavBarField"
+            key={item.label}
+            onClick={() => navigate(item.path)}
+          >
+            <FontAwesomeIcon icon={item.icon} className="icon" />
+            <span className="text">{item.label}</span>
+          </button>
+        ))}
+      </nav>
+
+      <div className="sidebar-footer">
+        <button
+          type="button"
+          className="SideNavBarField logout-sidebar-btn"
+          onClick={handleLogout}
+        >
+          <FontAwesomeIcon icon={faRightFromBracket} className="icon" />
+          <span className="text">Logout</span>
+        </button>
       </div>
 
-      <div className="SideNavBarField" onClick={() => navigate("/Graphs")}>
-        <FontAwesomeIcon icon={faChartLine} className="icon" /> <span className="text">Analytics</span>
-      </div>
-
-      <div className="SideNavBarField" onClick={() => navigate("/BillReminder")}>
-        <FontAwesomeIcon icon={faBell} className="icon" /> <span className="text">Bill reminders</span>
-      </div>
-
-      <div className="SideNavBarField" onClick={() => navigate("/PastBills")}>
-        <FontAwesomeIcon icon={faList} className="icon" /> <span className="text">Bill History</span>
-      </div>
-
-      <div className="SideNavBarField" onClick={() => navigate("/Home")}>
-        <FontAwesomeIcon icon={faHome} className="icon" /> <span className="text">Home</span>
-      </div>
-      
-      <div className="toggle-btn" onClick={handleToggle}>
-        {isOpen ? 'Close' : 'Open'}
-      </div>
-    </div>
+      <button
+        type="button"
+        className="toggle-btn"
+        onClick={handleToggle}
+        aria-label={isOpen ? "Close sidebar" : "Open sidebar"}
+        title={isOpen ? "Close sidebar" : "Open sidebar"}
+      >
+        <FontAwesomeIcon icon={isOpen ? faXmark : faBars} />
+      </button>
+    </aside>
   );
 };
 

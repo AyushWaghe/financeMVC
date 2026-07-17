@@ -3,11 +3,12 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { login, setBillAlertStatus } from '../../features/userSlice';
+import api from '../../api/AxiosConfig';
 
 function Login() {
   const navigate = useNavigate();
-  const [userName, setUserName] = useState('');
-  const [userPassword, setUserPassword] = useState('');
+  const [useremail, setuseremail] = useState('');
+  const [password, setpassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -18,25 +19,24 @@ function Login() {
     setLoading(true);
     setError(''); 
 
-    console.log("Logging in with:", { userName, userPassword });
-
-    dispatch(login({
-      userName: userName,
-      userPassword: userPassword
-    }));
-
-    dispatch(setBillAlertStatus({
-      alertStatus: true,
-    }));
-
     try {
       console.log("Trying to login");
-      const response = await axios.post('https://financemvc.onrender.com/register/userLogin', {
-        userName,
-        userPassword,
+      const response = await api.post('/auth/signin', {
+        useremail,
+        password,
+      },{
+        withCredentials:true //This tells Axios to send and receive cookies. 
       });
       if (response.data.success) {
-        console.log("Done"); 
+        
+        dispatch(login({
+          userId:response.data.userId,
+        }));
+    
+        dispatch(setBillAlertStatus({
+          alertStatus: true,
+        }));
+
         navigate("/Home");
       } else {
         setError('Invalid credentials'); 
@@ -53,16 +53,16 @@ function Login() {
     <div className="login-container">
       <h2 className="login-heading">Login</h2>
       <form>
-        <label htmlFor="username" className="login-label">
-          Username:
+        <label htmlFor="useremail" className="login-label">
+          useremail:
         </label>
         <input
           type="text"
-          id="username"
-          name="userName"
+          id="useremail"
+          name="useremail"
           className="login-input"
-          value={userName}
-          onChange={(e) => setUserName(e.target.value)}
+          value={useremail}
+          onChange={(e) => setuseremail(e.target.value)}
         />
 
         <label htmlFor="password" className="login-label">
@@ -71,10 +71,10 @@ function Login() {
         <input
           type="password"
           id="password"
-          name="userPassword"
+          name="password"
           className="login-input"
-          value={userPassword}
-          onChange={(e) => setUserPassword(e.target.value)}
+          value={password}
+          onChange={(e) => setpassword(e.target.value)}
         />
 
         <button type="submit" className="login-button" onClick={handleLogin} disabled={loading}>

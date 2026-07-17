@@ -1,45 +1,197 @@
-/* Field.css */
 .field-container {
-    margin: 20px;
+  width: 100%;
+  margin: 0;
+  background: #ffffff;
+  border: 1px solid #e3e8ef;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+  overflow-x: auto;
+  box-sizing: border-box;
+  font-size: xx-large;
+}
+
+.Month {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.MonthHeader {
+  margin: 0;
+  color: #172033;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.field-table {
+  width: 100%;
+  min-width: 900px;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+}
+
+.field-table th,
+.field-table td {
+  padding: 14px 12px;
+  text-align: left;
+  border-bottom: 1px solid #e3e8ef;
+  color: #344054;
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+.field-table th {
+  background: #f8fafc;
+  color: #172033;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  white-space: nowrap;
+  font-size: 15px;
+}
+
+.field-table tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+.field-table tbody tr:hover {
+  background: #f4f7fb;
+}
+
+.field-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.field-table td:nth-child(1) {
+  color: #172033;
+  /* font-weight: 700; */
+}
+
+.field-table td:nth-child(3) {
+  /* font-weight: 800; */
+  color: #172033;
+  white-space: nowrap;
+}
+
+.field-table td:nth-child(6),
+.field-table td:nth-child(7) {
+  /* font-weight: 700; */
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.field-table td[colspan] {
+  padding: 28px;
+  text-align: center;
+  color: #667085;
+  font-weight: 600;
+}
+
+.field-table button {
+  min-height: 34px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 13px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.field-table button:first-child {
+  background: #fee2e2;
+  color: #b91c1c;
+  margin-right: 8px;
+}
+
+.field-table button:first-child:hover {
+  background: #fecaca;
+}
+
+.field-table button:last-child {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.field-table button:last-child:hover {
+  background: #1d4ed8;
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.22);
+  transform: translateY(-1px);
+}
+
+.TotalSpan {
+  color: #172033;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+@media only screen and (max-width: 1100px) {
+  .field-container {
+    padding: 16px;
+  }
+
+  .MonthHeader {
+    font-size: 18px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .field-container {
+    padding: 14px;
+  }
+
+  .Month {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .field-table th,
+  .field-table td {
+    padding: 12px 10px;
+    font-size: 13px;
+  }
+
+  .field-table button {
+    display: block;
     width: 100%;
-    @media only screen and (max-width: 600px) {
-      margin-left: 20px;
-      width: 115%;
-    }
-  }
-  
-  .field-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-  }
-  
-  .field-table th, .field-table td {
-    padding: 10px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .field-table th {
-    background-color: #f2f2f2;
-  }
-  
-  .field-table tbody tr:hover {
-    background-color: #f5f5f5;
+    margin: 0;
   }
 
-  .Month{
-    display: flex;
-    justify-content: center;
-    margin: 0px;
+  .field-table button:first-child {
+    margin-right: 0;
+    margin-bottom: 8px;
   }
+}
 
-  .MonthHeader{
-    margin: 0px;
-  }
 
-  .TotalSpan{
-    font-weight: bold;
-    font-size: 20px;
-  }
-  
+.field-container h1 {
+  margin: 0 0 16px;
+  color: #172033;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.bill-status {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.bill-status.pending {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.bill-status.paid {
+  background: #dcfce7;
+  color: #15803d;
+}

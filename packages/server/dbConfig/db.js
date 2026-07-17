@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const dotenv = require("dotenv");
+const dotenv = require("dotenv");  //This is used to access the environment variables like API key and other things which are declared in .env file
 
 dotenv.config();
 

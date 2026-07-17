@@ -1,84 +1,294 @@
-  /* Styles.css */
+.transaction-history-container {
+  min-height: 100vh;
+  background: #f4f7fb;
+  padding: 20px;
+}
 
-  /* Card2 Styles */
-  .transaction-history-container{
-    padding: 0px;
+.transaction-page {
+  /* width: min(1180px, calc(100% - 40px)); */
+  max-width: 90%;
+  margin-left: 10%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.transaction-header {
+  background: #ffffff;
+  border: 1px solid #e3e8ef;
+  border-radius: 8px;
+  padding: 22px 24px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+}
+
+.transaction-header h2 {
+  margin: 0;
+  color: #172033;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.transaction-header p {
+  margin: 6px 0 0;
+  color: #667085;
+  font-size: 15px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(150px, 1fr));
+  gap: 14px;
+}
+
+.stats-card {
+  background: #ffffff;
+  border: 1px solid #e3e8ef;
+  border-radius: 8px;
+  padding: 18px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stats-card span {
+  color: #667085;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.stats-card strong {
+  color: #172033;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.income-card {
+  border-left: 5px solid #16a34a;
+}
+
+.expense-card {
+  border-left: 5px solid #dc2626;
+}
+
+.needs-card {
+  border-left: 5px solid #2563eb;
+}
+
+.wants-card {
+  border-left: 5px solid #d97706;
+}
+
+.savings-card {
+  border-left: 5px solid #059669;
+}
+
+.filter-panel,
+.form-panel {
+  background: #ffffff;
+  border: 1px solid #e3e8ef;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+}
+
+.filter-title {
+  color: #172033;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.filter-controls {
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.form-panel h3 {
+  margin: 0 0 16px;
+  color: #172033;
+  font-size: 20px;
+}
+
+.transaction-form {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(180px, 1fr));
+  gap: 16px;
+  align-items: end;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 0;
+}
+
+.form-row label {
+  color: #344054;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.input-field {
+  width: 100%;
+  min-height: 40px;
+  padding: 9px 11px;
+  border: 1px solid #cfd7e3;
+  border-radius: 6px;
+  color: #172033;
+  background: #ffffff;
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.input-field:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.14);
+}
+
+.input-field:disabled {
+  background: #eef2f7;
+  color: #667085;
+  cursor: not-allowed;
+}
+
+.button-container {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.submit-button,
+.cancel-button,
+.filter-button,
+.clear-button {
+  min-height: 40px;
+  padding: 0 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.submit-button,
+.filter-button {
+  background: #196b55;
+  color: #ffffff;
+}
+
+.submit-button:hover,
+.filter-button:hover {
+  background: #124b3b;
+  box-shadow: 0 8px 18px rgba(25, 107, 85, 0.25);
+  transform: translateY(-1px);
+}
+
+.cancel-button,
+.clear-button {
+  background: #eef2f7;
+  color: #344054;
+}
+
+.cancel-button:hover,
+.clear-button:hover {
+  background: #dbe3ef;
+}
+
+.card2 {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  width: auto;
+  margin: 0;
+}
+
+.ApplyButton {
+  margin: 0;
+}
+
+@media only screen and (max-width: 1100px) {
+  .transaction-page {
+    margin-left: 0;
+    width: 100%;
   }
-  .card2 {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    width: 1100px;
-    margin-top: 3px;
-    margin-left: 10%;
-    border: solid rgb(234, 232, 229);
 
-    @media only screen and (max-width:600px){
-      text-align: left;
-      font-size: 15px;
-      width: 100%;
-    }
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(160px, 1fr));
   }
 
-  .card2 h2 {
-    color: #333;
-  }
-
-  /* Transaction Form Styles */
   .transaction-form {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    grid-template-columns: repeat(2, minmax(180px, 1fr));
+  }
+}
 
-    @media only screen and (max-width:600px){
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: flex-start;
-      /* align-items: last baseline; */
-    }
+.error-message {
+  margin: 8px 0;
+  color: #dc2626;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+@media only screen and (max-width: 600px) {
+  .transaction-history-container {
+    padding: 12px;
   }
 
-  .form-row {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-
-    @media only screen and (max-width:600px){
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: flex-start;
-    }
-    
+  .transaction-page {
+    width: 100%;
+    margin-left: 0;
   }
 
-  .form-row label {
-    margin-right: 10px;
+  .transaction-header {
+    padding: 18px;
   }
 
-  .input-field {
-    padding: 8px;
-    border: 1px solid #00000065;
-    border-radius: 5px;
+  .transaction-header h2 {
+    font-size: 22px;
   }
 
-  .submit-button {
-    background-color: #4caf50;
-    color: #fff;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  .stats-grid,
+  .transaction-form {
+    grid-template-columns: 1fr;
   }
 
-  .submit-button:hover {
-    background-color: #45a049;
+  .filter-controls {
+    flex-direction: column;
+    align-items: stretch;
   }
 
-  .ApplyButton{
-    @media only screen and (max-width:600px){
-      margin-top: 5%;
-    }
+  .button-container {
+    flex-direction: column;
+    align-items: stretch;
   }
+
+  .submit-button,
+  .cancel-button,
+  .filter-button,
+  .clear-button {
+    width: 100%;
+  }
+}
+
+.navbar-wrapper {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  z-index: 1000;
+  width: calc(100% - 40px);
+  max-width: 1280px;
+  transform: translateX(-50%);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 10px 28px rgba(18, 54, 94, 0.24);
+}
+
+/* Keeps page content from hiding behind the fixed navbar */
+.page-content {
+  /* padding-top: 105px; */
+}

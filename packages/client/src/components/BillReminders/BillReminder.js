@@ -4,33 +4,86 @@ import BillField from './BillField.js';
 import axios from "axios";
 import { useSelector } from 'react-redux';
 import SideNavBar from '../SideNavBar/SideNavBar';
+import BillInstanceField from "./BillInstanceField.js";
+import { faL } from "@fortawesome/free-solid-svg-icons";
+import api from "../../api/AxiosConfig";
 
 const BillReminder = () => {
 
   const [navBarisToggle, setNavBarisToggle] = useState(false);
 
-  const [handleSubmitStatus,setHandleSubmitStatus] = useState(false);
+  const [handleSubmitStatus, setHandleSubmitStatus] = useState(false);
 
-  const [description, setDescription] = useState('');
-  const [cost, setCost] = useState('');
+  const [title, settitle] = useState('');
+  const [amount, setamount] = useState('');
   const [dueDate, setDueDate] = useState('');
+  const [recurrenceType, setRecurrenceType] = useState('NONE');
   const [bills, setBills] = useState([]);
+  const [billInstances, setBillInstances] = useState([]);
+  const [overdueBillInstances, setOverdueBillInstances] = useState([]);
+  const [isUpdating, setIsUpdating] = useState(false);
+  const [billId,setBillId]=useState('');
+
 
   const user = useSelector((state) => state.user);
-  const userName = user.user.userName;
+  const userId = user.user.userId;
 
   const setNavBarTogggle = () => {
     setNavBarisToggle(!navBarisToggle);
   }
 
-  const fetchActiveBills = async () => {
+  const fetchAllBills = async () => {
+    fetchBillInstances();
+    fetchBills();
+  }
+
+  const handleUpdate = (billId) => {
+    setIsUpdating(true);
+    setBillId(billId);
+    const bill = bills.find((b) => b.billId === billId);
+    settitle(bill.title);
+    setDueDate(bill.dueDate);
+    setamount(bill.amount);
+    setRecurrenceType(bill.billRecurrence);
+    fetchAllBills();
+  }
+
+  const fetchBills = async () => {
     try {
-      const response = await axios.get(`https://financemvc.onrender.com/BillReminders/fetchBills?userName=${userName}&activeStatus=${1}`);
-      setBills(response.data.activeBills);
+      const response = await api.get(`/bill/user/${userId}`,{
+        withCredentials:true //This tells Axios to send and receive cookies. 
+      });
+      setBills(response.data.data);
     } catch (err) {
-      console.log(err.message);
+      console.log(err);
     }
   };
+
+  const fetchBillInstances = async () => {
+    //Get bill instances of the user 
+    try {
+      const response = await api.get(`/bill-instance/upcoming/${userId}`,{
+        withCredentials:true //This tells Axios to send and receive cookies. 
+      });
+      setBillInstances(response.data.data);
+      console.log("Bill instances", response.data.data);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  const fetchOverDueBillInstances = async () => {
+    //Get bill instances of the user 
+    try {
+      const response = await api.get(`/bill-instance/overdue/${userId}`,{
+        withCredentials:true //This tells Axios to send and receive cookies. 
+      });
+      setOverdueBillInstances(response.data.data);
+      // console.log("Bill instances", response.data.data);
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   // console.log(bills);
 
@@ -51,28 +104,63 @@ const BillReminder = () => {
     e.preventDefault();
 
     const billData = {
-      userName: userName,
-      description: description,
-      cost: cost,
+      userId: userId,
+      title: title,
+      amount: amount,
       dueDate: dateToUse,
     }
 
-    try {
-      
-      await axios.post('https://financemvc.onrender.com/BillReminders/saveBill', billData);
-      console.log("Getaa billa");
-    } catch (e) {
-      console.log(e);
+    if(isUpdating===true){
+      billData.billRecurrence = recurrenceType;
+      try {
+        await api.put(`/bill/${billId}`, billData,{
+          withCredentials:true //This tells Axios to send and receive cookies. 
+        });
+      } catch (e) {
+        console.log(e);
+      }
+      setIsUpdating(false);
+      settitle('');
+      setamount('');
+      setDueDate('');
+      setRecurrenceType('NONE');
+      fetchAllBills();
+      return;
     }
-    
-    setDescription('');
-    setCost('');
+
+    if (recurrenceType === "NONE") {
+      billData.billStatus = "PENDING";
+      try {
+        await api.post('/bill-instance', billData,{
+          withCredentials:true //This tells Axios to send and receive cookies. 
+        });
+      } catch (e) {
+        console.log(e);
+      }
+    } else {
+      billData.billRecurrence = recurrenceType;
+      try {
+        await api.post('/bill', billData,{
+          withCredentials:true //This tells Axios to send and receive cookies. 
+        });
+      } catch (e) {
+        console.log(e);
+      }
+    }
+
+    if (recurrenceType === "NONE") {
+      fetchBillInstances();
+    } else {
+      fetchAllBills();
+    }
+    settitle('');
+    setamount('');
     setDueDate('');
-    fetchActiveBills();
   };
 
   useEffect(() => {
-    fetchActiveBills();
+    fetchAllBills();
+    fetchOverDueBillInstances();
   }, []);
 
   return (
@@ -90,30 +178,30 @@ const BillReminder = () => {
             <div className="Container">
               <div className="form-group">
                 <div className="des">
-                  <label htmlFor="description">Description:</label>
+                  <label htmlFor="title">Title:</label>
                 </div>
 
                 <div>
                   <input
                     type="text"
-                    id="description"
-                    name="description"
-                    placeholder="Enter description"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
+                    id="title"
+                    name="title"
+                    placeholder="Enter title"
+                    value={title}
+                    onChange={(e) => settitle(e.target.value)}
                     required
                   />
                 </div>
               </div>
               <div className="form-group">
-                <label htmlFor="cost">Cost:</label>
+                <label htmlFor="amount">Amount:</label>
                 <input
                   type="number"
-                  id="cost"
-                  name="cost"
-                  placeholder="Enter cost"
-                  value={cost}
-                  onChange={(e) => setCost(e.target.value)}
+                  id="amount"
+                  name="amount"
+                  placeholder="Enter amount"
+                  value={amount}
+                  onChange={(e) => setamount(e.target.value)}
                   required
                 />
               </div>
@@ -124,21 +212,75 @@ const BillReminder = () => {
                   id="dueDate"
                   name="dueDate"
                   value={dueDate}
+                  min={new Date().toLocaleDateString("en-CA")}
                   onChange={(e) => setDueDate(e.target.value)}
                   required
                 />
               </div>
+
               <div className="form-group">
-                <input type="submit" value="Submit" />
+                <label htmlFor="recurrenceType">Recurrence Type:</label>
+                <select
+                  id="recurrenceType"
+                  name="recurrenceType"
+                  className="input-field"
+                  value={recurrenceType}
+                  onChange={(e) => setRecurrenceType(e.target.value)}
+                >
+                  {!isUpdating && <option value="NONE">NONE</option>}
+
+                  <option value="DAILY">DAILY</option>
+                  <option value="WEEKLY">WEEKLY</option>
+                  <option value="MONTHLY">MONTHLY</option>
+                  <option value="QUARTERLY">QUARTERLY</option>
+                  <option value="HALF_YEARLY">HALF_YEARLY</option>
+                  <option value="YEARLY">YEARLY</option>
+                </select>
+              </div>
+
+              <div className="form-group">
+                <input
+                  type="submit"
+                  value={isUpdating ? "Update" : "Submit"}
+                />
+
+                {isUpdating && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsUpdating(false);
+                      settitle('');
+                      setamount('');
+                      setBillId('');
+                      setRecurrenceType('NONE');
+                    }}
+                  >
+                    Cancel
+                  </button>
+                )}
               </div>
             </div>
           </form>
         </div>
         <BillField
           bills={bills}
-          onDelete={fetchActiveBills}
+          onDelete={fetchAllBills}
+          handleUpdate={handleUpdate}
+        />
+        <BillInstanceField
+          bills={billInstances}
+          onDelete={fetchBillInstances}
+          sectionTitle={"UPCOMING BILLS"}
+          status={"PENDING"}
+        />
+        <BillInstanceField
+          bills={overdueBillInstances}
+          onDelete={fetchOverDueBillInstances}
+          sectionTitle={"OVERDUE BILLS!"}
+          status={"OVERDUE"}
         />
       </div>
+
     </div>
 
   );

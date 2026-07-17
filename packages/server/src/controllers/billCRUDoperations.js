@@ -8,7 +8,7 @@ async function generateId() {
     return uniqueRandomNumber;
 }
 
-const saveBillReminder = async (req, res) => {
+const saveBillReminder = async (req, res) => {  //Post method
     try {
         const { userName, description, cost, dueDate } = req.body;
         console.log("Bill data", req.body);
@@ -46,7 +46,7 @@ const saveBillReminder = async (req, res) => {
     }
 }
 
-const fetchBillAlert = async (req, res) => {
+const fetchBillAlert = async (req, res) => { //GET Method 
     const { userName } = req.query;
     try {
         const todaysDate = new Date();
@@ -72,7 +72,7 @@ const fetchBillAlert = async (req, res) => {
     }
 }
 
-const fetchBills = async (req, res) => {
+const fetchBills = async (req, res) => { //GET
     async function fetchBillsFromDB({ userName, activeStatus }) {
         try {
             const todaysDate = new Date();
@@ -118,7 +118,7 @@ const fetchBills = async (req, res) => {
     }
 }
 
-const deleteBillReminder = async (req, res) => {
+const deleteBillReminder = async (req, res) => { //Delete
     try {
         console.log("Delete Bill Reminder!!!");
         const { billId, userName } = req.query;

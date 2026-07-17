@@ -2,19 +2,15 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import '../../assets/FieldStyle.css';
+import api from '../../api/AxiosConfig';
 
-function BillField({bills,onDelete}) {
+function BillField({bills,onDelete,handleUpdate}) {
   console.log(bills);
-  const user = useSelector((state) => state.user);
-  const userName = user.user.userName;
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete('https://financemvc.onrender.com/BillReminders/deleteBill', {
-        params: {
-          billId: id,
-          userName: userName,
-        },
+      await api.delete(`/bill/${id}`,{
+        withCredentials:true //This tells Axios to send and receive cookies. 
       });
       onDelete();
     } catch (e) {
@@ -24,12 +20,16 @@ function BillField({bills,onDelete}) {
 
   return (
     <div className="field-container">
+    <div>
+      <h1>BILLS</h1>
+    </div>
       <table className="field-table">
         <thead>
           <tr>
-            <th>Description</th>
-            <th>Cost</th>
-            <th>Date</th>
+            <th>Title</th>
+            <th>Amount</th>
+            <th>Recurrence</th>
+            <th>Recurrence due date</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -43,12 +43,16 @@ function BillField({bills,onDelete}) {
             bills &&
             bills.map((bill) => (
               <tr key={bill.billId}>
-                <td>{bill.billDescription}</td>
-                <td>{bill.billAmount}</td>
-                <td>{bill.billDueDate}</td>
+                <td>{bill.title}</td>
+                <td>{bill.amount}</td>
+                <td>{bill.billRecurrence}</td>
+                <td>{bill.dueDate}</td>
                 <td>
                   <button onClick={() => handleDelete(bill.billId)}>
                     Delete
+                  </button>
+                  <button onClick={() => handleUpdate(bill.billId)}>
+                    Update
                   </button>
                   {/* <button onClick={() => onEdit(bill.id)}>
                     Update

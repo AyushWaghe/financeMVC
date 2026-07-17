@@ -9,24 +9,30 @@ import Main from './components/APINews/Main';
 import Graphs from './components/Graphs/Graphs.js';
 import BillReminder from './components/BillReminders/BillReminder.js';
 import PastBills from './components/PastBills/PastBills.js';
-
+import Profile from './components/UserProfile/Profile.js';
 import './App.css';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.js';
 
 function App() {
   return (
     <Router>
       <div className="App">
+
+
         <Routes>
-          {/* The Login component is rendered when the /login path is matched */}
           <Route path="/" element={<MainDiv />} />
           <Route path="/login" element={<Login />} />
           <Route path="/Sign" element={<SignUp />} />
+
+          <Route element={<ProtectedRoute />}>
           <Route path="/Home" element={<Home />} />
           <Route path="/Transact" element={<Transact />} />
           <Route path="/Main" element={<Main />} />
           <Route path="/Graphs" element={<Graphs />} />
           <Route path="/BillReminder" element={<BillReminder />} />
           <Route path="/PastBills" element={<PastBills />} />
+          <Route path="/Profile" element={<Profile />} />
+          </Route>
         </Routes>
       </div>
     </Router>

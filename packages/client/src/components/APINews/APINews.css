@@ -5,7 +5,7 @@
     border: 1px solid #ddd;
     width: 500px;
     border-radius: 8px;
-    overflow: hidden;
+    overflow: hidden; /*This hides the content which is overflowing  from the div element*/
     margin: 20px;
     padding: 20px;
     background-color: #fff;
@@ -41,6 +41,6 @@
   
   .news-author,
   .news-source {
-    margin: 5px 0;
+    margin: 5px 0; /*This sets top and bottom to 5px and left and right to 0 the general order which we follow is top right bottom left */
   }
   

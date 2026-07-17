@@ -10,7 +10,7 @@ async function generateTransactionId() {
 
 const saveTransaction = async (req, res) => {
   try {
-    const { description, cost, date, userName, newMonth, prevMonth } = req.body;
+    const { description, cost, date, userName, newMonth, prevMonth } = req.body; 
     console.log(req.body);
 
     const user = await Transaction.findOne({ userTransactions: userName });
@@ -84,8 +84,7 @@ const fetchTransaction = async (req, res) => {
     const currentUser = await Transaction.findOne({ userTransactions: userName });
     // console.log(currentUser);
 
-    if (!currentUser) {
-      // console.log("User NOT FOUND...");  // Log when userName is missing
+    if (!currentUser) {  //User not found
       return res.status(404).json({ message: 'User not found' });
     }
     if (currentUser) {
@@ -147,7 +146,7 @@ const fetchTransactionsForGraphs = async (req, res) => {
 
 // --------------------------------------------------------------------------
 
-const updateTransaction = async (req, res) => {
+const updateTransaction = async (req, res) => { //PUT
   try {
     const { description, cost, date, userName, newMonth, prevMonth, id } = req.query;
 

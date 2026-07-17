@@ -2,7 +2,7 @@
 const User = require('../models/userSchema.js');
 
 const loginController =async(req,res)=>{
-  const { userName, userPassword } = req.body;
+  const { userName, userPassword } = req.body; //req is the request object which comes from the frontend
     try {
       const user = await User.findOne({
         username: userName,

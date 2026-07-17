@@ -16,7 +16,7 @@ const signUpController = async (req, res) => {
         });
         await newUser.save();
 
-        return res.json({ success: true, message: 'Signup successful', redirect: '/Home' });
+        return res.status(200).json({ success: true, message: 'Signup successful', redirect: '/Home' });
     } catch (error) {
         console.log(error);
         return res.status(500).json({ success: false, message: 'Internal server error' });
