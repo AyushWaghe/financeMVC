@@ -1,22 +1,23 @@
-General Styles body {
+/* General Styles */
+
+body {
   font-family: "Arial", sans-serif;
   margin: 0;
 }
 
-.home-container{
+.home-container {
   width: 100%;
-  background-color:#8bf0cb;
+  background-color: #8bf0cb;
 }
 
 .Model {
   z-index: 5;
-  position: fixed; 
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   background-color: rgba(128, 128, 128, 0.5);
-  /* padding-left: 50px; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,18 +25,12 @@ General Styles body {
 
 .SideNavBarInHomePage {
   z-index: 6;
-  position: fixed; 
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
 }
-
-/* Home Container */
-/* .home-container {
-  display: flex;
-  flex-direction: column;
-} */
 
 .sidebar h2 {
   color: black;
@@ -57,6 +52,7 @@ General Styles body {
 }
 
 /* Content Styles */
+
 .content {
   width: 100%;
   display: flex;
@@ -75,14 +71,17 @@ General Styles body {
   align-items: center;
   column-gap: 10px;
   width: 100%;
+}
 
-  @media only screen and (max-width:600px) {
+@media only screen and (max-width: 600px) {
+  .content-row {
     flex-direction: column;
     row-gap: 50px;
   }
 }
 
 /* HomePageCards Styles */
+
 .HomePageCards {
   width: 45%;
   display: flex;
@@ -92,9 +91,11 @@ General Styles body {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  position: relative; /* Added position relative for button positioning */
-  
-  @media only screen and (max-width:600px) {
+  position: relative;
+}
+
+@media only screen and (max-width: 600px) {
+  .HomePageCards {
     width: 70%;
     height: 70%;
     padding: 5%;
@@ -106,8 +107,9 @@ General Styles body {
 }
 
 /* Explore Button Styles */
+
 .explore-button {
-  background-color: #4caf50; /* Green color */
+  background-color: #4caf50;
   color: white;
   padding: 10px;
   border: none;
@@ -120,12 +122,10 @@ General Styles body {
 }
 
 .explore-button:hover {
-  background-color: #45a049; 
+  background-color: #45a049;
 }
 
-/* Responsive Styles */
-
-.Homa{
+.Homa {
   position: absolute;
   /* height: 100%; */
 }

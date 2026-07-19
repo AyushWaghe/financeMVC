@@ -1,9 +1,9 @@
-.SuperMasterContainer{
-    padding: 0px;
+.SuperMasterContainer {
+  padding: 0px;
 }
 
-.navBar{
-    margin-top:  1000px;
+.navBar {
+  margin-top: 1000px;
 }
 
 .Master {
@@ -29,9 +29,9 @@
   border: none;
   padding: 10px 20px;
   cursor: pointer;
-  transition: background-color 0.3s ease; /*This sets up the transition for the button bg color */
+  transition: background-color 0.3s ease; /* This sets up the transition for the button bg color */
   border-radius: 5px;
-  margin:2%;
+  margin: 2%;
 }
 
 .fetch-button:hover {
@@ -42,14 +42,14 @@
   background-color: forestgreen;
 }
 
-.NewsPageHeading{
-    font-size: 40px;
-    font-weight: bold;
-    margin: 1%;
-
-    @media screen and (max-width:600px){
-      font-size: 25px;
-    }
+.NewsPageHeading {
+  font-size: 40px;
+  font-weight: bold;
+  margin: 1%;
 }
 
-
+@media screen and (max-width: 600px) {
+  .NewsPageHeading {
+      font-size: 25px;
+  }
+}
