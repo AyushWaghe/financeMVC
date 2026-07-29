@@ -105,7 +105,7 @@ function Transact() {
       const transactionsResponse = await api.get(
         `/transactions/monthly?userId=${userId}&month=${month}&year=${year}`,
         {
-          withCredentials:true //This tells Axios to send and receive cookies. 
+          withCredentials: true //This tells Axios to send and receive cookies. 
         });
 
       setTransactions(transactionsResponse.data.data);
@@ -119,9 +119,9 @@ function Transact() {
 
     try {
       const statsResponse = await api.get(
-        `/analytics/month-stats/user/${userId}?month=${month}&year=${year}`,{
-          withCredentials:true //This tells Axios to send and receive cookies. 
-        }
+        `/analytics/month-stats/user/${userId}?month=${month}&year=${year}`, {
+        withCredentials: true //This tells Axios to send and receive cookies. 
+      }
       );
 
       setMonthStats(statsResponse.data.data);
@@ -160,9 +160,9 @@ function Transact() {
       try {
         await api.put(
           `/transactions/${currentTransactionId}`,
-          transactionData,{
-            withCredentials:true //This tells Axios to send and receive cookies. 
-          }
+          transactionData, {
+          withCredentials: true //This tells Axios to send and receive cookies. 
+        }
         );
 
         setIsUpdating(false);
@@ -174,9 +174,9 @@ function Transact() {
       try {
         const response = await api.post(
           '/transactions',
-          transactionData,{
-            withCredentials:true //This tells Axios to send and receive cookies. 
-          }
+          transactionData, {
+          withCredentials: true //This tells Axios to send and receive cookies. 
+        }
         );
 
         if (!response.data.success) {
@@ -255,218 +255,219 @@ function Transact() {
         />
       </div> */}
 
-    <div className="page-content">
-       
+      <div className="page-content">
 
-      <div className="transaction-page">
-        <div className="transaction-header">
-          <div>
-            <h2>Transaction History</h2>
-            <h2>{selectedMonthName} {finalSelectedYear}</h2>
-          </div>
-        </div>
 
-        <div className="stats-grid">
-          <div className="stats-card income-card">
-            <span>Total Income</span>
-            <strong>₹{formatAmount(monthStats.totalIncome)}</strong>
+        <div className="transaction-page">
+          <div className="transaction-header">
+            <div>
+              <h2>Transaction History</h2>
+              <h2>{selectedMonthName} {finalSelectedYear}</h2>
+            </div>
           </div>
 
-          <div className="stats-card expense-card">
-            <span>Total Expense</span>
-            <strong>₹{formatAmount(monthStats.totalExpense)}</strong>
+          <div className="stats-grid">
+            <div className="stats-card income-card">
+              <span>Total Income</span>
+              <strong>₹{formatAmount(monthStats.totalIncome)}</strong>
+            </div>
+
+            <div className="stats-card expense-card">
+              <span>Total Expense</span>
+              <strong>₹{formatAmount(monthStats.totalExpense)}</strong>
+            </div>
+
+            <div className="stats-card needs-card">
+              <span>Needs Expense</span>
+              <strong>₹{formatAmount(monthStats.totalNeedsExpense)}</strong>
+            </div>
+
+            <div className="stats-card wants-card">
+              <span>Wants Expense</span>
+              <strong>₹{formatAmount(monthStats.totalWantsExpense)}</strong>
+            </div>
+
+            <div className="stats-card savings-card">
+              <span>Total Savings</span>
+              <strong>₹{formatAmount(monthStats.totalSavings)}</strong>
+            </div>
           </div>
 
-          <div className="stats-card needs-card">
-            <span>Needs Expense</span>
-            <strong>₹{formatAmount(monthStats.totalNeedsExpense)}</strong>
-          </div>
+          {statsError && <p className="error-message">{statsError}</p>}
 
-          <div className="stats-card wants-card">
-            <span>Wants Expense</span>
-            <strong>₹{formatAmount(monthStats.totalWantsExpense)}</strong>
-          </div>
+          <div className="filter-panel">
+            <div className="filter-title">Monthly Filter</div>
 
-          <div className="stats-card savings-card">
-            <span>Total Savings</span>
-            <strong>₹{formatAmount(monthStats.totalSavings)}</strong>
-          </div>
-        </div>
+            <div className="filter-controls">
+              <div className="form-row">
+                <label htmlFor="selectedMonth">Month</label>
+                <select
+                  id="selectedMonth"
+                  name="selectedMonth"
+                  className="input-field"
+                  value={selectedMonth}
+                  onChange={(e) => setSelectedMonth(parseInt(e.target.value))}
+                >
+                  {months.map((month) => (
+                    <option key={month.value} value={month.value}>
+                      {month.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
-        {statsError && <p className="error-message">{statsError}</p>}
+              <div className="form-row">
+                <label htmlFor="selectedYear">Year</label>
+                <input
+                  type="number"
+                  id="selectedYear"
+                  name="selectedYear"
+                  className="input-field"
+                  value={selectedYear}
+                  onChange={(e) => setSelectedYear(parseInt(e.target.value))}
+                />
+              </div>
 
-        <div className="filter-panel">
-          <div className="filter-title">Monthly Filter</div>
-
-          <div className="filter-controls">
-            <div className="form-row">
-              <label htmlFor="selectedMonth">Month</label>
-              <select
-                id="selectedMonth"
-                name="selectedMonth"
-                className="input-field"
-                value={selectedMonth}
-                onChange={(e) => setSelectedMonth(parseInt(e.target.value))}
-              >
-                {months.map((month) => (
-                  <option key={month.value} value={month.value}>
-                    {month.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className="form-row">
-              <label htmlFor="selectedYear">Year</label>
-              <input
-                type="number"
-                id="selectedYear"
-                name="selectedYear"
-                className="input-field"
-                value={selectedYear}
-                onChange={(e) => setSelectedYear(parseInt(e.target.value))}
-              />
-            </div>
-
-            <button type="button" className="filter-button" onClick={handleAppliedMonthFilter}>
-              Apply Filter
-            </button>
-
-            <button type="button" className="clear-button" onClick={handleClearFilter}>
-              Clear
-            </button>
-          </div>
-        </div>
-
-        <div className="form-panel">
-          <h3>{isUpdating ? 'Update Transaction' : 'Add Transaction'}</h3>
-
-          <form className="transaction-form" onSubmit={handleSubmit}>
-            <div className="form-row">
-              <label htmlFor="title">Title</label>
-              <input
-                type="text"
-                id="title"
-                name="title"
-                className="input-field"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                maxLength={50}
-                required
-              />
-            </div>
-
-            <div className="form-row">
-              <label htmlFor="description">Description</label>
-              <input
-                type="text"
-                id="description"
-                name="description"
-                className="input-field"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                maxLength={100}
-              />
-            </div>
-
-            <div className="form-row">
-              <label htmlFor="cost">Amount</label>
-              <input
-                type="number"
-                id="cost"
-                name="cost"
-                className="input-field"
-                value={cost}
-                onChange={(e) => setCost(e.target.value)}
-                min="0.0"
-                max="10000000.0"
-                step="0.01"
-                required
-              />
-            </div>
-
-            <div className="form-row">
-              <label htmlFor="date">Date</label>
-              <input
-                type="date"
-                id="date"
-                name="date"
-                className="input-field"
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
-              />
-            </div>
-
-            <div className="form-row">
-              <label htmlFor="transactionType">Type</label>
-              <select
-                id="transactionType"
-                name="transactionType"
-                className="input-field"
-                value={transactionType}
-                onChange={handleTransactionTypeChange}
-              >
-                <option value="INCOME">INCOME</option>
-                <option value="EXPENSE">EXPENSE</option>
-              </select>
-            </div>
-
-            <div className="form-row">
-              <label htmlFor="category">Category</label>
-              <input
-                id="category"
-                name="category"
-                className="input-field"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-                maxLength={25}
-              />
-            </div>
-
-            <div className="form-row">
-              <label htmlFor="spendingType">Spending Type</label>
-              <select
-                id="spendingType"
-                name="spendingType"
-                className="input-field"
-                value={spendingType}
-                onChange={(e) => setSpendingType(e.target.value)}
-                disabled={transactionType === "INCOME"}
-              >
-                {transactionType === "INCOME" && <option value="NA">NA</option>}
-                <option value="NEEDS">NEEDS</option>
-                <option value="WANTS">WANTS</option>
-                <option value="SAVINGS">SAVINGS</option>
-              </select>
-            </div>
-
-            <div className="button-container">
-              <button type="submit" className="submit-button">
-                {isUpdating ? 'Update' : 'Submit'}
+              <button type="button" className="filter-button" onClick={handleAppliedMonthFilter}>
+                Apply Filter
               </button>
 
-              {isUpdating && (
-                <button type="button" className="cancel-button" onClick={handleCancelUpdate}>
-                  Cancel
-                </button>
-              )}
+              <button type="button" className="clear-button" onClick={handleClearFilter}>
+                Clear
+              </button>
             </div>
-          </form>
+          </div>
+
+          <div className="form-panel">
+            <h3>{isUpdating ? 'Update Transaction' : 'Add Transaction'}</h3>
+
+            <form className="transaction-form" onSubmit={handleSubmit}>
+              <div className="form-row">
+                <label htmlFor="title">Title</label>
+                <input
+                  type="text"
+                  id="title"
+                  name="title"
+                  className="input-field"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  maxLength={50}
+                  required
+                />
+              </div>
+
+              <div className="form-row">
+                <label htmlFor="description">Description</label>
+                <input
+                  type="text"
+                  id="description"
+                  name="description"
+                  className="input-field"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  maxLength={100}
+                />
+              </div>
+
+              <div className="form-row">
+                <label htmlFor="cost">Amount</label>
+                <input
+                  type="number"
+                  id="cost"
+                  name="cost"
+                  className="input-field"
+                  value={cost}
+                  onChange={(e) => setCost(e.target.value)}
+                  min="0.0"
+                  max="10000000.0"
+                  step="0.01"
+                  required
+                />
+              </div>
+
+              <div className="form-row">
+                <label htmlFor="date">Date</label>
+                <input
+                  type="date"
+                  id="date"
+                  name="date"
+                  className="input-field"
+                  value={date}
+                  max={new Date().toISOString().split("T")[0]}
+                  onChange={(e) => setDate(e.target.value)}
+                />
+              </div>
+
+              <div className="form-row">
+                <label htmlFor="transactionType">Type</label>
+                <select
+                  id="transactionType"
+                  name="transactionType"
+                  className="input-field"
+                  value={transactionType}
+                  onChange={handleTransactionTypeChange}
+                >
+                  <option value="INCOME">INCOME</option>
+                  <option value="EXPENSE">EXPENSE</option>
+                </select>
+              </div>
+
+              <div className="form-row">
+                <label htmlFor="category">Category</label>
+                <input
+                  id="category"
+                  name="category"
+                  className="input-field"
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
+                  maxLength={25}
+                />
+              </div>
+
+              <div className="form-row">
+                <label htmlFor="spendingType">Spending Type</label>
+                <select
+                  id="spendingType"
+                  name="spendingType"
+                  className="input-field"
+                  value={spendingType}
+                  onChange={(e) => setSpendingType(e.target.value)}
+                  disabled={transactionType === "INCOME"}
+                >
+                  {transactionType === "INCOME" && <option value="NA">NA</option>}
+                  <option value="NEEDS">NEEDS</option>
+                  <option value="WANTS">WANTS</option>
+                  <option value="SAVINGS">SAVINGS</option>
+                </select>
+              </div>
+
+              <div className="button-container">
+                <button type="submit" className="submit-button">
+                  {isUpdating ? 'Update' : 'Submit'}
+                </button>
+
+                {isUpdating && (
+                  <button type="button" className="cancel-button" onClick={handleCancelUpdate}>
+                    Cancel
+                  </button>
+                )}
+              </div>
+            </form>
+          </div>
+
+          {transactionsError && <p className="error-message">{transactionsError}</p>}
+
+          <Field
+            Month={selectedMonthName}
+            transactions={transactions}
+            onDelete={fetchTransactions}
+            onEdit={handleEdit}
+            total={monthTotal}
+            year={finalSelectedYear}
+          />
         </div>
-
-        {transactionsError && <p className="error-message">{transactionsError}</p>}
-
-        <Field
-          Month={selectedMonthName}
-          transactions={transactions}
-          onDelete={fetchTransactions}
-          onEdit={handleEdit}
-          total={monthTotal}
-          year={finalSelectedYear}
-        />
       </div>
     </div>
-     </div>
   );
 }
 
