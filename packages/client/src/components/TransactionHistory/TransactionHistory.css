@@ -292,3 +292,50 @@
 .page-content {
   /* padding-top: 105px; */
 }
+
+.category-dropdown {
+  position: relative;
+  width: 100%;
+}
+
+.category-dropdown input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+}
+
+.category-dropdown input:focus {
+  border-color: #666;
+}
+
+.category-options {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+
+  max-height: 200px;
+  overflow-y: auto;
+
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+
+  z-index: 1000;
+}
+
+.category-option {
+  padding: 10px 12px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.category-option:hover {
+  background-color: #f5f5f5;
+}

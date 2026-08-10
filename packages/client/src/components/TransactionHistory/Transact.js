@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Field from './Field';
 import axios from 'axios';
 import './TransactionHistory.css';
 import SideNavBar from '../SideNavBar/SideNavBar';
 import api from '../../api/AxiosConfig';
+import { addCategory, selectCategories } from '../../features/categorySlice';
 
 
 function Transact() {
+  const dispatch = useDispatch()
   const months = [
     { value: 1, label: "January" },
     { value: 2, label: "February" },
@@ -36,6 +38,9 @@ function Transact() {
     totalSavings: 0
   });
 
+
+  const categories = useSelector(selectCategories);
+  const [showCategories, setShowCategories] = useState(false);
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
   const [transactionType, setTransactionType] = useState("EXPENSE");
@@ -56,6 +61,11 @@ function Transact() {
 
   const user = useSelector((state) => state.user);
   const userId = user.user.userId;
+
+  const filteredCategories = categories.filter((c) =>
+    c.title.toLowerCase().includes(category.toLowerCase())
+  );
+
 
   const [selectedMonthName, setSelectedMonthName] = useState(months.find((month) => month.value === new Date().getMonth() + 1)?.label);
 
@@ -142,6 +152,7 @@ function Transact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const finalCategory = category.trim();
 
     const dateToUse = date ? formatDate(date) : formatDate(Date.now());
 
@@ -167,6 +178,16 @@ function Transact() {
 
         setIsUpdating(false);
         setCurrentTransactionId(null);
+        const existingCategory = categories.find(
+          c => c.title.toLowerCase() === finalCategory.toLowerCase()
+        );
+
+        if (!existingCategory) {
+          dispatch(addCategory({
+            title: finalCategory
+          }));
+        }
+
       } catch (error) {
         console.error('Error updating transaction:', error);
       }
@@ -182,6 +203,16 @@ function Transact() {
         if (!response.data.success) {
           alert("Something went wrong");
           throw new Error("Failed to save the transaction");
+        }
+
+        const existingCategory = categories.find(
+          c => c.title.toLowerCase() === finalCategory.toLowerCase()
+        );
+
+        if (!existingCategory) {
+          dispatch(addCategory({
+            title: finalCategory
+          }));
         }
       } catch (error) {
         console.error('Error creating transaction:', error.message);
@@ -412,17 +443,41 @@ function Transact() {
                 </select>
               </div>
 
-              <div className="form-row">
-                <label htmlFor="category">Category</label>
+              <div className="category-dropdown">
                 <input
-                  id="category"
-                  name="category"
-                  className="input-field"
+                  type="text"
                   value={category}
-                  onChange={(e) => setCategory(e.target.value)}
-                  maxLength={25}
+                  placeholder="Select or enter category"
+                  onChange={(e) => {
+                    setCategory(e.target.value);
+                    setShowCategories(true);
+                  }}
+                  onFocus={() => setShowCategories(true)}
+                  onBlur={() => {
+                    setCategory((prev) => prev.trim());
+                    setShowCategories(false);
+                  }}
                 />
+
+                {showCategories && filteredCategories.length > 0 && (
+                  <div className="category-options">
+                    {filteredCategories.map((c) => (
+                      <div
+                        key={c.id}
+                        className="category-option"
+                        onMouseDown={() => {
+                          setCategory(c.title);
+                          setShowCategories(false);
+                        }}
+                      >
+                        {c.title}
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
+
+
 
               <div className="form-row">
                 <label htmlFor="spendingType">Spending Type</label>

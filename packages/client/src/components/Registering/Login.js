@@ -4,6 +4,8 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { login, setBillAlertStatus } from '../../features/userSlice';
 import api from '../../api/AxiosConfig';
+import { setCategories } from '../../features/categorySlice';
+import fetchCategories from '../Functions/fetchCategories';
 
 function Login() {
   const navigate = useNavigate();
@@ -38,6 +40,13 @@ function Login() {
         }));
 
         navigate("/Home");
+
+        const categories=await fetchCategories(response.data.userId);
+      
+        dispatch(setCategories({
+          categories
+        }))
+        
       } else {
         setError('Invalid credentials'); 
       }

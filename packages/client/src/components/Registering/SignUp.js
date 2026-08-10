@@ -4,6 +4,8 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { signup, setBillAlertStatus } from '../../features/userSlice';
 import api from '../../api/AxiosConfig';
+import fetchCategories from '../Functions/fetchCategories';
+import { setCategories } from '../../features/categorySlice';
 
 function SignUp() {
   const navigate = useNavigate();
@@ -38,6 +40,11 @@ function SignUp() {
         }));
 
         navigate("/Home");
+
+        const categories=await fetchCategories(response.data.userId);
+        dispatch(setCategories({
+          categories
+        }))
 
       } else {
         console.log("none"); // Login failed
