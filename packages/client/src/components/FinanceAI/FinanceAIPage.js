@@ -18,13 +18,6 @@ const FinanceAIPage = () => {
   const [reasoningCredits, setReasoningCredits] = useState(0);
 
   const messagesEndRef = useRef(null);
-
-  /*
-   * Automatically scroll to the latest message.
-   *
-   * Later when pagination is implemented, this can be changed so
-   * that scrolling to the top loads older messages instead.
-   */
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({
       behavior: "smooth",
@@ -45,8 +38,9 @@ const FinanceAIPage = () => {
   const fetchMessages = async () => {
     try {
       const response = await financeAIapi.get(`/chat/getMessages`);
-
-      // Backend returns the complete chat history
+      console.log("Messages response:", response);
+console.log("Messages data:", response.data);
+console.log("Is array:", Array.isArray(response.data));
       setMessages(response.data);
     } catch (error) {
       console.error("Failed to get messages:", error);
@@ -55,7 +49,6 @@ const FinanceAIPage = () => {
 
   const fetchReasoningCredits = async () => {
     try {
-      // Replace this endpoint with your actual endpoint
       const response = await financeAIapi.get(`/chat/getCredits`);
 
       setReasoningCredits(response.data.data);
@@ -86,11 +79,10 @@ const FinanceAIPage = () => {
         }
       });
 
-      // Backend returns the complete chat history
       setMessages(response.data);
       setMessage("");
 
-      // Refresh credits after a reasoning request
+      // Refresh credits 
       if (reasoningEnabled) {
         const response = await financeAIapi.get(`/chat/decrementCredit`);
         setReasoningCredits(response.data.data);
