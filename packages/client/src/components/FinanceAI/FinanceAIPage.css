@@ -1,772 +1,1194 @@
+/* =========================================================
+   Main Page
+========================================================= */
+
 .FinanceAIPageContainer {
-    min-height: 100vh;
-    background: #f4f7fb;
-    padding: 20px;
-    box-sizing: border-box;
+  min-height: 100vh;
+  min-height: 100dvh;
+
+  width: 100%;
+
+  background: #f4f7fb;
+
+  padding: 20px;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   Master Container
+========================================================= */
+
+.FinanceAIMasterContainer {
+  width: 90%;
+
+  max-width: 1400px;
+
+  margin-left: 10%;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 18px;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   Header
+========================================================= */
+
+.FinanceAIHeader {
+  width: 100%;
+
+  background: #ffffff;
+
+  border: 1px solid #e3e8ef;
+
+  border-radius: 8px;
+
+  padding: 20px;
+
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+
+  box-sizing: border-box;
+}
+
+.FinanceAIHeader h1 {
+  margin: 0;
+
+  color: #172033;
+
+  font-size: 24px;
+}
+
+.FinanceAIHeader p {
+  margin: 6px 0 0;
+
+  color: #667085;
+
+  font-size: 14px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   Chat Card
+========================================================= */
+
+.FinanceAIChatCard {
+  width: 100%;
+
+  height: calc(100vh - 150px);
+  height: calc(100dvh - 150px);
+
+  min-height: 500px;
+
+  background: #ffffff;
+
+  border: 1px solid #e3e8ef;
+
+  border-radius: 8px;
+
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   Messages
+========================================================= */
+
+.FinanceAIMessageContainer {
+  flex: 1;
+
+  min-height: 0;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  padding: 24px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 14px;
+
+  scroll-behavior: smooth;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   Scrollbar
+========================================================= */
+
+.FinanceAIMessageContainer::-webkit-scrollbar {
+  width: 7px;
+}
+
+.FinanceAIMessageContainer::-webkit-scrollbar-track {
+  background: #f4f7fb;
+}
+
+.FinanceAIMessageContainer::-webkit-scrollbar-thumb {
+  background: #cfd7e3;
+
+  border-radius: 10px;
+}
+
+.FinanceAIMessageContainer::-webkit-scrollbar-thumb:hover {
+  background: #b7c1cf;
+}
+
+
+/* =========================================================
+   Message Rows
+========================================================= */
+
+.FinanceAIMessageRow {
+  display: flex;
+
+  width: 100%;
+
+  box-sizing: border-box;
+}
+
+.FinanceAIUserRow {
+  justify-content: flex-end;
+}
+
+.FinanceAIAssistantRow {
+  justify-content: flex-start;
+}
+
+
+/* =========================================================
+   Messages
+========================================================= */
+
+.FinanceAIMessage {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 10px;
+
+  max-width: 70%;
+
+  line-height: 1.5;
+
+  font-size: 14px;
+
+  box-sizing: border-box;
+}
+
+.FinanceAIMessageContent {
+  min-width: 0;
+
+  padding: 11px 15px;
+
+  border-radius: 10px;
+
+  white-space: pre-wrap;
+
+  overflow-wrap: anywhere;
+
+  word-break: break-word;
+
+  text-align: left;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   User Message
+========================================================= */
+
+.FinanceAIUserMessage {
+  flex-direction: row-reverse;
+}
+
+.FinanceAIUserMessage .FinanceAIMessageContent {
+  background: #196b55;
+
+  color: #ffffff;
+
+  border-bottom-right-radius: 3px;
+}
+
+
+/* =========================================================
+   Assistant Message
+========================================================= */
+
+.FinanceAIAssistantMessage .FinanceAIMessageContent {
+  background: #eef2f7;
+
+  color: #172033;
+
+  border-bottom-left-radius: 3px;
+}
+
+
+/* =========================================================
+   AI Avatar
+========================================================= */
+
+.FinanceAIAvatar {
+  width: 32px;
+  height: 32px;
+
+  min-width: 32px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #196b55;
+
+  color: #ffffff;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 11px;
+
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   Empty State
+========================================================= */
+
+.FinanceAIEmptyState {
+  width: 100%;
+
+  max-width: 550px;
+
+  margin: auto;
+
+  text-align: center;
+
+  color: #667085;
+
+  box-sizing: border-box;
+}
+
+.FinanceAIEmptyIcon {
+  width: 55px;
+  height: 55px;
+
+  margin: 0 auto 15px;
+
+  border-radius: 50%;
+
+  background: #196b55;
+
+  color: #ffffff;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 15px;
+
+  font-weight: 700;
+}
+
+.FinanceAIEmptyState h2 {
+  margin: 0;
+
+  color: #172033;
+
+  font-size: 22px;
+}
+
+.FinanceAIEmptyState p {
+  margin: 8px auto 20px;
+
+  max-width: 450px;
+
+  font-size: 14px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   Suggested Questions
+========================================================= */
+
+.FinanceAISuggestions {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  justify-content: center;
+
+  gap: 8px;
+}
+
+.FinanceAISuggestions button {
+  border: 1px solid #cfd7e3;
+
+  background: #ffffff;
+
+  color: #344054;
+
+  padding: 9px 12px;
+
+  border-radius: 6px;
+
+  cursor: pointer;
+
+  font-size: 13px;
+
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease;
+
+  box-sizing: border-box;
+}
+
+.FinanceAISuggestions button:hover {
+  background: #eef2f7;
+
+  border-color: #b7c1cf;
+}
+
+
+/* =========================================================
+   Input Container
+========================================================= */
+
+.FinanceAIInputContainer {
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 15px;
+
+  border-top: 1px solid #e3e8ef;
+
+  background: #ffffff;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   Textarea
+========================================================= */
+
+.FinanceAIInputContainer textarea {
+  flex: 1;
+
+  min-width: 0;
+
+  min-height: 42px;
+
+  max-height: 120px;
+
+  resize: vertical;
+
+  padding: 10px 12px;
+
+  border: 1px solid #cfd7e3;
+
+  border-radius: 6px;
+
+  color: #172033;
+
+  background: #ffffff;
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  outline: none;
+
+  box-sizing: border-box;
+}
+
+.FinanceAIInputContainer textarea:focus {
+  border-color: #2563eb;
+
+  box-shadow:
+    0 0 0 3px rgba(37, 99, 235, 0.14);
+}
+
+.FinanceAIInputContainer textarea:disabled {
+  background: #f4f7fb;
+}
+
+
+/* =========================================================
+   Send Button
+========================================================= */
+
+.FinanceAISendButton {
+  flex-shrink: 0;
+
+  align-self: stretch;
+
+  min-height: 42px;
+
+  padding: 0 18px;
+
+  border: none;
+
+  border-radius: 6px;
+
+  background: #196b55;
+
+  color: #ffffff;
+
+  font-weight: 700;
+
+  font-size: 14px;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.FinanceAISendButton:hover:not(:disabled) {
+  background: #124b3b;
+
+  box-shadow:
+    0 8px 18px rgba(25, 107, 85, 0.25);
+
+  transform: translateY(-1px);
+}
+
+.FinanceAISendButton:disabled {
+  background: #b7c1cf;
+
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   Delete Button
+========================================================= */
+
+.FinanceAIDeleteButton {
+  flex-shrink: 0;
+
+  align-self: stretch;
+
+  min-height: 42px;
+
+  padding: 0 16px;
+
+  border: 1px solid #dc3545;
+
+  border-radius: 8px;
+
+  background: transparent;
+
+  color: #dc3545;
+
+  cursor: pointer;
+
+  font-size: 14px;
+
+  transition: 0.2s ease;
+
+  box-sizing: border-box;
+}
+
+.FinanceAIDeleteButton:hover:not(:disabled) {
+  background: #dc3545;
+
+  color: #ffffff;
+}
+
+.FinanceAIDeleteButton:disabled {
+  opacity: 0.5;
+
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   Reasoning Option
+========================================================= */
+
+.FinanceAIReasoningOption {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 10px;
+
+  margin-bottom: 0;
+
+  padding: 0 4px;
+
+  box-sizing: border-box;
+}
+
+.FinanceAIReasoningToggle {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  min-width: 0;
+
+  cursor: pointer;
+
+  user-select: none;
+}
+
+.FinanceAIReasoningToggle input {
+  display: none;
+}
+
+.FinanceAIReasoningSlider {
+  width: 36px;
+  height: 20px;
+
+  min-width: 36px;
+
+  background: #ccc;
+
+  border-radius: 20px;
+
+  position: relative;
+
+  transition: 0.2s;
+}
+
+.FinanceAIReasoningSlider::after {
+  content: "";
+
+  width: 16px;
+  height: 16px;
+
+  background: #ffffff;
+
+  border-radius: 50%;
+
+  position: absolute;
+
+  top: 2px;
+  left: 2px;
+
+  transition: 0.2s;
+}
+
+.FinanceAIReasoningToggle input:checked
+  + .FinanceAIReasoningSlider {
+  background: #4f46e5;
+}
+
+.FinanceAIReasoningToggle input:checked
+  + .FinanceAIReasoningSlider::after {
+  transform: translateX(16px);
+}
+
+.FinanceAIReasoningLabel {
+  font-size: 14px;
+
+  font-weight: 500;
+
+  white-space: nowrap;
+}
+
+.FinanceAIReasoningCredits {
+  flex-shrink: 0;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  color: #5b5bd6;
+
+  background: #f0f0ff;
+
+  border: 1px solid #dedeff;
+
+  padding: 4px 9px;
+
+  border-radius: 999px;
+
+  white-space: nowrap;
+
+  transition: all 0.2s ease;
+}
+
+.FinanceAIReasoningCreditsEmpty {
+  color: #d32f2f;
+
+  background: #fff1f1;
+
+  border-color: #ffd5d5;
+}
+
+.FinanceAIReasoningToggle input:disabled
+  + .FinanceAIReasoningSlider {
+  opacity: 0.5;
+}
+
+.FinanceAIReasoningToggle:has(input:disabled) {
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   Reasoning Info
+========================================================= */
+
+.FinanceAIReasoningInfo {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  width: 15px;
+  height: 15px;
+
+  min-width: 15px;
+
+  border: 1px solid #999;
+
+  border-radius: 50%;
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  color: #777;
+
+  cursor: help;
+
+  position: relative;
+}
+
+.FinanceAIReasoningInfo:hover {
+  color: #4f46e5;
+
+  border-color: #4f46e5;
+}
+
+
+/* =========================================================
+   Reasoning Tooltip
+========================================================= */
+
+.FinanceAIReasoningTooltip {
+  position: absolute;
+
+  bottom: calc(100% + 8px);
+
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: 220px;
+
+  padding: 10px 12px;
+
+  background: #222;
+
+  color: #ffffff;
+
+  border-radius: 7px;
+
+  font-size: 12px;
+
+  font-weight: 400;
+
+  line-height: 1.5;
+
+  text-align: left;
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  pointer-events: none;
+
+  transition: opacity 0.15s ease;
+
+  z-index: 1000;
+
+  box-sizing: border-box;
+}
+
+.FinanceAIReasoningTooltip::after {
+  content: "";
+
+  position: absolute;
+
+  top: 100%;
+
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  border-left: 6px solid transparent;
+
+  border-right: 6px solid transparent;
+
+  border-top: 6px solid #222;
+}
+
+.FinanceAIReasoningInfo:hover
+  .FinanceAIReasoningTooltip {
+  opacity: 1;
+
+  visibility: visible;
+}
+
+
+/* =========================================================
+   Typing Indicator
+========================================================= */
+
+.FinanceAITyping {
+  min-width: 55px;
+
+  padding: 13px 15px;
+
+  background: #eef2f7;
+
+  border-radius: 10px;
+
+  border-bottom-left-radius: 3px;
+
+  display: flex;
+
+  gap: 4px;
+
+  box-sizing: border-box;
+}
+
+.FinanceAITyping span {
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: #667085;
+
+  animation: FinanceAITypingAnimation 1.2s infinite ease-in-out;
+}
+
+.FinanceAITyping span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.FinanceAITyping span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes FinanceAITypingAnimation {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
   }
-  
+
+  30% {
+    transform: translateY(-4px);
+  }
+}
+
+
+/* =========================================================
+   Tablet
+========================================================= */
+
+@media only screen and (max-width: 1100px) {
+
+  .FinanceAIPageContainer {
+    padding: 16px;
+  }
+
   .FinanceAIMasterContainer {
-    max-width: 90%;
-    margin-left: 10%;
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
+    width: 100%;
+
+    max-width: 100%;
+
+    margin-left: 0;
   }
-  
-  /* =========================
+
+  .FinanceAIMessage {
+    max-width: 80%;
+  }
+}
+
+
+/* =========================================================
+   Mobile
+========================================================= */
+
+@media only screen and (max-width: 600px) {
+
+  .FinanceAIPageContainer {
+    width: 100%;
+
+    min-height: 100dvh;
+
+    padding: 8px;
+  }
+
+
+  /* -------------------------
+     Main Container
+  ------------------------- */
+
+  .FinanceAIMasterContainer {
+    width: 100%;
+
+    max-width: 100%;
+
+    margin-left: 0;
+
+    gap: 10px;
+  }
+
+
+  /* -------------------------
      Header
-  ========================= */
-  
+  ------------------------- */
+
   .FinanceAIHeader {
-    background: #ffffff;
-    border: 1px solid #e3e8ef;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+    width: 100%;
+
+    padding: 14px;
   }
-  
+
   .FinanceAIHeader h1 {
-    margin: 0;
-    color: #172033;
-    font-size: 24px;
+    font-size: 20px;
   }
-  
+
   .FinanceAIHeader p {
-    margin: 6px 0 0;
-    color: #667085;
-    font-size: 14px;
+    font-size: 13px;
+
+    line-height: 1.4;
   }
-  
-  
-  /* =========================
+
+
+  /* -------------------------
      Chat Card
-  ========================= */
-  
+  ------------------------- */
+
   .FinanceAIChatCard {
     width: 100%;
-    height: calc(100vh - 150px);
-    min-height: 500px;
-  
-    background: #ffffff;
-    border: 1px solid #e3e8ef;
-    border-radius: 8px;
-  
-    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
-  
-    display: flex;
-    flex-direction: column;
-  
-    overflow: hidden;
+
+    height: calc(100dvh - 125px);
+
+    min-height: 0;
   }
-  
-  
-  /* =========================
+
+
+  /* -------------------------
      Messages
-  ========================= */
-  
+  ------------------------- */
+
   .FinanceAIMessageContainer {
-    flex: 1;
-    overflow-y: auto;
-  
-    padding: 24px;
-  
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  
-    scroll-behavior: smooth;
+    padding: 12px;
+
+    gap: 12px;
   }
-  
-  /* Scrollbar */
-  
-  .FinanceAIMessageContainer::-webkit-scrollbar {
-    width: 7px;
-  }
-  
-  .FinanceAIMessageContainer::-webkit-scrollbar-track {
-    background: #f4f7fb;
-  }
-  
-  .FinanceAIMessageContainer::-webkit-scrollbar-thumb {
-    background: #cfd7e3;
-    border-radius: 10px;
-  }
-  
-  .FinanceAIMessageContainer::-webkit-scrollbar-thumb:hover {
-    background: #b7c1cf;
-  }
-  
-  
-  /* =========================
-     Message Rows
-  ========================= */
-  
-  .FinanceAIMessageRow {
-    display: flex;
-    width: 100%;
-  }
-  
-  .FinanceAIUserRow {
-    justify-content: flex-end;
-  }
-  
-  .FinanceAIAssistantRow {
-    justify-content: flex-start;
-  }
-  
-  
-  /* =========================
-     Messages
-  ========================= */
-  
+
   .FinanceAIMessage {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-  
-    max-width: 70%;
-  
-    line-height: 1.5;
+    max-width: 92%;
+
+    gap: 7px;
+
     font-size: 14px;
   }
-  
+
   .FinanceAIMessageContent {
-    padding: 11px 15px;
-    border-radius: 10px;
-  
-    white-space: pre-wrap;
-    overflow-wrap: anywhere;
-    text-align: left;
-  }
-  
-  
-  /* User */
-  
-  .FinanceAIUserMessage {
-    flex-direction: row-reverse;
-  }
-  
-  .FinanceAIUserMessage .FinanceAIMessageContent {
-    background: #196b55;
-    color: #ffffff;
-  
-    border-bottom-right-radius: 3px;
-  }
-  
-  
-  /* Assistant */
-  
-  .FinanceAIAssistantMessage .FinanceAIMessageContent {
-    background: #eef2f7;
-    color: #172033;
-  
-    border-bottom-left-radius: 3px;
-  }
-  
-  
-  /* =========================
-     AI Avatar
-  ========================= */
-  
-  .FinanceAIAvatar {
-    width: 32px;
-    height: 32px;
-  
-    min-width: 32px;
-  
-    border-radius: 50%;
-  
-    background: #196b55;
-    color: #ffffff;
-  
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  
-    font-size: 11px;
-    font-weight: 700;
-  }
-  
-  
-  /* =========================
-     Empty State
-  ========================= */
-  
-  .FinanceAIEmptyState {
-    margin: auto;
-  
-    max-width: 550px;
-  
-    text-align: center;
-    color: #667085;
-  }
-  
-  .FinanceAIEmptyIcon {
-    width: 55px;
-    height: 55px;
-  
-    margin: 0 auto 15px;
-  
-    border-radius: 50%;
-  
-    background: #196b55;
-    color: #ffffff;
-  
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  
-    font-size: 15px;
-    font-weight: 700;
-  }
-  
-  .FinanceAIEmptyState h2 {
-    margin: 0;
-  
-    color: #172033;
-    font-size: 22px;
-  }
-  
-  .FinanceAIEmptyState p {
-    margin: 8px auto 20px;
-  
-    max-width: 450px;
-  
-    font-size: 14px;
-  }
-  
-  
-  /* =========================
-     Suggested Questions
-  ========================= */
-  
-  .FinanceAISuggestions {
-    display: flex;
-    flex-wrap: wrap;
-  
-    justify-content: center;
-  
-    gap: 8px;
-  }
-  
-  .FinanceAISuggestions button {
-    border: 1px solid #cfd7e3;
-    background: #ffffff;
-  
-    color: #344054;
-  
-    padding: 9px 12px;
-  
-    border-radius: 6px;
-  
-    cursor: pointer;
-  
-    font-size: 13px;
-  
-    transition:
-      background-color 0.15s ease,
-      border-color 0.15s ease;
-  }
-  
-  .FinanceAISuggestions button:hover {
-    background: #eef2f7;
-    border-color: #b7c1cf;
-  }
-  
-  
-  /* =========================
-     Input
-  ========================= */
-  
-  .FinanceAIInputContainer {
-    display: flex;
-    gap: 10px;
-  
-    padding: 15px;
-  
-    border-top: 1px solid #e3e8ef;
-  
-    background: #ffffff;
-  }
-  
-  .FinanceAIInputContainer textarea {
-    flex: 1;
-  
-    min-height: 42px;
-    max-height: 120px;
-  
-    resize: vertical;
-  
+    max-width: 100%;
+
     padding: 10px 12px;
-  
-    border: 1px solid #cfd7e3;
-    border-radius: 6px;
-  
-    color: #172033;
-    background: #ffffff;
-  
-    font-family: inherit;
-    font-size: 14px;
-  
-    outline: none;
-  
-    box-sizing: border-box;
   }
-  
-  .FinanceAIInputContainer textarea:focus {
-    border-color: #2563eb;
-  
-    box-shadow:
-      0 0 0 3px rgba(37, 99, 235, 0.14);
-  }
-  
-  .FinanceAIInputContainer textarea:disabled {
-    background: #f4f7fb;
-  }
-  
-  
-  /* =========================
-     Send Button
-  ========================= */
-  
-  .FinanceAISendButton {
-    align-self: flex-end;
-  
-    min-height: 42px;
-  
-    padding: 0 18px;
-  
-    border: none;
-    border-radius: 6px;
-  
-    background: #196b55;
-    color: #ffffff;
-  
-    font-weight: 700;
-    font-size: 14px;
-  
-    cursor: pointer;
-  
-    transition:
-      transform 0.15s ease,
-      box-shadow 0.15s ease,
-      background-color 0.15s ease;
-  }
-  
-  .FinanceAISendButton:hover:not(:disabled) {
-    background: #124b3b;
-  
-    box-shadow:
-      0 8px 18px rgba(25, 107, 85, 0.25);
-  
-    transform: translateY(-1px);
-  }
-  
-  .FinanceAISendButton:disabled {
-    background: #b7c1cf;
-    cursor: not-allowed;
-  }
-  
-  
-  /* =========================
-     Typing Indicator
-  ========================= */
-  
-  .FinanceAITyping {
-    min-width: 55px;
-  
-    padding: 13px 15px;
-  
-    background: #eef2f7;
-  
-    border-radius: 10px;
-    border-bottom-left-radius: 3px;
-  
-    display: flex;
-    gap: 4px;
-  }
-  
-  .FinanceAITyping span {
-    width: 6px;
-    height: 6px;
-  
-    border-radius: 50%;
-  
-    background: #667085;
-  
-    animation: FinanceAITypingAnimation 1.2s infinite ease-in-out;
-  }
-  
-  .FinanceAITyping span:nth-child(2) {
-    animation-delay: 0.15s;
-  }
-  
-  .FinanceAITyping span:nth-child(3) {
-    animation-delay: 0.3s;
-  }
-  
-  @keyframes FinanceAITypingAnimation {
-    0%,
-    60%,
-    100% {
-      transform: translateY(0);
-    }
-  
-    30% {
-      transform: translateY(-4px);
-    }
-  }
-  
-  
-  /* =========================
-     Responsive
-  ========================= */
-  
-  @media only screen and (max-width: 1100px) {
-  
-    .FinanceAIMasterContainer {
-      max-width: 100%;
-      margin-left: 0;
-    }
-  
-    .FinanceAIMessage {
-      max-width: 80%;
-    }
-  }
-  
-  
-  @media only screen and (max-width: 600px) {
-  
-    .FinanceAIPageContainer {
-      padding: 12px;
-    }
-  
-    .FinanceAIHeader {
-      padding: 15px;
-    }
-  
-    .FinanceAIHeader h1 {
-      font-size: 20px;
-    }
-  
-    .FinanceAIChatCard {
-      height: calc(100vh - 125px);
-      min-height: 450px;
-    }
-  
-    .FinanceAIMessageContainer {
-      padding: 15px;
-    }
-  
-    .FinanceAIMessage {
-      max-width: 88%;
-    }
-  
-    .FinanceAIInputContainer {
-      padding: 10px;
-    }
-  
-    .FinanceAISendButton {
-      padding: 0 14px;
-    }
-  
-    .FinanceAISuggestions {
-      flex-direction: column;
-    }
-  
-    .FinanceAISuggestions button {
-      width: 100%;
-    }
+
+  .FinanceAIAvatar {
+    width: 28px;
+    height: 28px;
+
+    min-width: 28px;
+
+    font-size: 10px;
   }
 
 
-  .FinanceAIDeleteButton {
-    padding: 10px 16px;
-    border: 1px solid #dc3545;
-    border-radius: 8px;
-    background: transparent;
-    color: #dc3545;
-    cursor: pointer;
-    font-size: 14px;
-    transition: 0.2s ease;
+  /* -------------------------
+     Empty State
+  ------------------------- */
+
+  .FinanceAIEmptyState {
+    width: 100%;
+
+    max-width: 100%;
+
+    padding: 10px;
   }
-  
-  .FinanceAIDeleteButton:hover {
-    background: #dc3545;
-    color: white;
+
+  .FinanceAIEmptyIcon {
+    width: 50px;
+    height: 50px;
   }
-  
-  .FinanceAIDeleteButton:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+
+  .FinanceAIEmptyState h2 {
+    font-size: 20px;
   }
+
+  .FinanceAIEmptyState p {
+    font-size: 13px;
+  }
+
+
+  /* -------------------------
+     Suggestions
+  ------------------------- */
+
+  .FinanceAISuggestions {
+    width: 100%;
+
+    flex-direction: column;
+
+    gap: 7px;
+  }
+
+  .FinanceAISuggestions button {
+    width: 100%;
+
+    padding: 10px;
+
+    font-size: 13px;
+  }
+
+
+  /* -------------------------
+     Input Area
+  ------------------------- */
+
+  .FinanceAIInputContainer {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    grid-template-areas:
+      "reasoning reasoning"
+      "textarea textarea"
+      "send delete";
+
+    gap: 8px;
+
+    padding: 10px;
+  }
+
+
+  /* -------------------------
+     Reasoning
+  ------------------------- */
 
   .FinanceAIReasoningOption {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 10px;
-    padding: 0 4px;
-  }
-  
-  .FinanceAIReasoningToggle {
-    display: flex;
-    align-items: center;
+    grid-area: reasoning;
+
+    width: 100%;
+
+    padding: 0 2px;
+
     gap: 8px;
-    cursor: pointer;
-    user-select: none;
   }
-  
-  .FinanceAIReasoningToggle input {
-    display: none;
+
+  .FinanceAIReasoningToggle {
+    gap: 6px;
   }
-  
+
   .FinanceAIReasoningSlider {
-    width: 36px;
-    height: 20px;
-    background: #ccc;
-    border-radius: 20px;
-    position: relative;
-    transition: 0.2s;
+    width: 34px;
+
+    min-width: 34px;
   }
-  
-  .FinanceAIReasoningSlider::after {
-    content: "";
-    width: 16px;
-    height: 16px;
-    background: white;
-    border-radius: 50%;
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    transition: 0.2s;
-  }
-  
-  .FinanceAIReasoningToggle input:checked
-    + .FinanceAIReasoningSlider {
-    background: #4f46e5;
-  }
-  
-  .FinanceAIReasoningToggle input:checked
-    + .FinanceAIReasoningSlider::after {
-    transform: translateX(16px);
-  }
-  
+
   .FinanceAIReasoningLabel {
-    font-size: 14px;
-    font-weight: 500;
-  }
-  
-  .FinanceAIReasoningCredits {
     font-size: 12px;
-    font-weight: 600;
-    color: #5b5bd6;
-  
-    background: #f0f0ff;
-    border: 1px solid #dedeff;
-  
-    padding: 4px 9px;
-    border-radius: 999px;
-  
+
     white-space: nowrap;
-  
-    transition: all 0.2s ease;
-  }
-  
-  .FinanceAIReasoningCreditsEmpty {
-    color: #d32f2f;
-  }
-  
-  .FinanceAIReasoningToggle input:disabled
-    + .FinanceAIReasoningSlider {
-    opacity: 0.5;
-  }
-  
-  .FinanceAIReasoningToggle:has(input:disabled) {
-    cursor: not-allowed;
-  }
-  
-  
-  /* ONLY NEW CSS */
-  .FinanceAIReasoningInfo {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  
-    width: 15px;
-    height: 15px;
-  
-    border: 1px solid #999;
-    border-radius: 50%;
-  
-    font-size: 10px;
-    font-weight: 600;
-    color: #777;
-  
-    cursor: help;
-    margin-left: -3px;
-  }
-  
-  .FinanceAIReasoningInfo:hover {
-    color: #4f46e5;
-    border-color: #4f46e5;
   }
 
-  .FinanceAIReasoningInfo {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  
-    width: 15px;
-    height: 15px;
-  
-    border: 1px solid #999;
-    border-radius: 50%;
-  
-    font-size: 10px;
-    font-weight: 600;
-    color: #777;
-  
-    cursor: help;
-    position: relative;
-    margin-left: -3px;
+  .FinanceAIReasoningCredits {
+    font-size: 11px;
+
+    padding: 4px 7px;
   }
-  
-  .FinanceAIReasoningInfo:hover {
-    color: #4f46e5;
-    border-color: #4f46e5;
+
+
+  /* -------------------------
+     Textarea
+  ------------------------- */
+
+  .FinanceAIInputContainer textarea {
+    grid-area: textarea;
+
+    width: 100%;
+
+    min-width: 0;
+
+    min-height: 44px;
+
+    font-size: 14px;
+
+    resize: vertical;
   }
-  
-  /* Popup */
+
+
+  /* -------------------------
+     Send
+  ------------------------- */
+
+  .FinanceAISendButton {
+    grid-area: send;
+
+    width: 100%;
+
+    min-height: 42px;
+
+    padding: 0 10px;
+
+    font-size: 13px;
+  }
+
+
+  /* -------------------------
+     Delete
+  ------------------------- */
+
+  .FinanceAIDeleteButton {
+    grid-area: delete;
+
+    width: 100%;
+
+    min-height: 42px;
+
+    padding: 0 6px;
+
+    font-size: 11px;
+
+    white-space: normal;
+  }
+
+
+  /* -------------------------
+     Tooltip
+  ------------------------- */
+
   .FinanceAIReasoningTooltip {
-    position: absolute;
-  
-    bottom: calc(100% + 8px);
-    left: 50%;
-    transform: translateX(-50%);
-  
-    width: 220px;
-    padding: 10px 12px;
-  
-    background: #222;
-    color: #fff;
-  
-    border-radius: 7px;
-  
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 1.5;
-  
-    text-align: left;
-  
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-  
-    transition: opacity 0.15s ease;
-  
-    z-index: 1000;
+    width: 210px;
+
+    left: 0;
+
+    transform: none;
   }
-  
-  /* Small arrow */
+
   .FinanceAIReasoningTooltip::after {
-    content: "";
-  
-    position: absolute;
-  
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-  
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 6px solid #222;
+    left: 25px;
+
+    transform: none;
   }
-  
-  /* Show popup */
-  .FinanceAIReasoningInfo:hover .FinanceAIReasoningTooltip {
-    opacity: 1;
-    visibility: visible;
+}
+
+
+/* =========================================================
+   Very Small Phones
+========================================================= */
+
+@media only screen and (max-width: 380px) {
+
+  .FinanceAIPageContainer {
+    padding: 5px;
+  }
+
+  .FinanceAIHeader {
+    padding: 12px;
+  }
+
+  .FinanceAIHeader h1 {
+    font-size: 19px;
+  }
+
+  .FinanceAIHeader p {
+    font-size: 12px;
+  }
+
+  .FinanceAIMessageContainer {
+    padding: 9px;
+  }
+
+  .FinanceAIMessage {
+    max-width: 95%;
+
+    font-size: 13px;
+  }
+
+  .FinanceAIMessageContent {
+    padding: 9px 10px;
+  }
+
+  .FinanceAIInputContainer {
+    padding: 8px;
+  }
+
+  .FinanceAIReasoningLabel {
+    font-size: 11px;
+  }
+
+  .FinanceAIReasoningCredits {
+    font-size: 10px;
+
+    padding: 3px 6px;
   }
 
   .FinanceAIReasoningInfo {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  
-    width: 15px;
-    height: 15px;
-  
-    border: 1px solid #999;
-    border-radius: 50%;
-  
-    font-size: 10px;
-    font-weight: 600;
-    color: #777;
-  
-    cursor: help;
-    position: relative;
-    margin-left: -3px;
-  }
-  
-  .FinanceAIReasoningInfo:hover {
-    color: #4f46e5;
-    border-color: #4f46e5;
-  }
-  
-  /* Info popup */
-  .FinanceAIReasoningTooltip {
-    position: absolute;
-  
-    bottom: calc(100% + 8px);
-    left: 50%;
-    transform: translateX(-50%);
-  
-    width: 220px;
-    padding: 10px 12px;
-  
-    background: #222;
-    color: white;
-  
-    border-radius: 7px;
-  
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 1.5;
-  
-    text-align: left;
-  
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-  
-    transition: opacity 0.15s ease;
-  
-    z-index: 1000;
-  }
-  
-  /* Popup arrow */
-  .FinanceAIReasoningTooltip::after {
-    content: "";
-  
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-  
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 6px solid #222;
-  }
-  
-  /* Show popup */
-  .FinanceAIReasoningInfo:hover .FinanceAIReasoningTooltip {
-    opacity: 1;
-    visibility: visible;
+    width: 14px;
+    height: 14px;
+
+    min-width: 14px;
   }
 
-  .FinanceAIReasoningCreditsEmpty {
-    color: #d32f2f;
-    background: #fff1f1;
-    border-color: #ffd5d5;
+  .FinanceAISendButton,
+  .FinanceAIDeleteButton {
+    min-height: 40px;
   }
+}
