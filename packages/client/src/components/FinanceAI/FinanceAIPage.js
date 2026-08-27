@@ -1,12 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import { financeAIapi, api } from "../../api/AxiosConfig.js";
+import { useDispatch, useSelector } from 'react-redux';
 
 import "./FinanceAIPage.css";
 
 import SideNavBar from "../SideNavBar/SideNavBar.js";
 
 const FinanceAIPage = () => {
+
+  const user = useSelector((state) => state.user);
+  const userId = user.user.userId;
 
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
@@ -37,7 +41,7 @@ const FinanceAIPage = () => {
 
   const fetchMessages = async () => {
     try {
-      const response = await financeAIapi.get(`/chat/getMessages`);
+      const response = await api.get(`/financeAIChat/getMessages`);
       console.log("Messages response:", response);
 console.log("Messages data:", response.data);
 console.log("Is array:", Array.isArray(response.data));
@@ -49,7 +53,11 @@ console.log("Is array:", Array.isArray(response.data));
 
   const fetchReasoningCredits = async () => {
     try {
-      const response = await financeAIapi.get(`/chat/getCredits`);
+      const response = await api.get(`/user-profile/getCredits`,{
+        params:{
+          userId:userId
+        }
+      });
 
       setReasoningCredits(response.data.data);
     } catch (error) {
@@ -72,7 +80,7 @@ console.log("Is array:", Array.isArray(response.data));
     setLoading(true);
 
     try {
-      const response = await financeAIapi.get(`/chat`, {
+      const response = await api.get(`/financeAIChat`, {
         params: {
           query: trimmedMessage,
           thinkAndAnswer: reasoningEnabled
@@ -84,7 +92,11 @@ console.log("Is array:", Array.isArray(response.data));
 
       // Refresh credits 
       if (reasoningEnabled) {
-        const response = await financeAIapi.get(`/chat/decrementCredit`);
+        const response = await api.get(`/user-profile/decrementCredit`,{
+          params:{
+            userId:userId
+          }
+        });
         setReasoningCredits(response.data.data);
       }
 
@@ -104,7 +116,7 @@ console.log("Is array:", Array.isArray(response.data));
 
   const deleteConversation = async () => {
     try {
-      await financeAIapi.delete("/chat");
+      await api.delete("/financeAIChat");
       setMessage("");
       fetchMessages();
     } catch (error) {

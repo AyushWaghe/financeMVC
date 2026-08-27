@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./KnowledgePage.css";
-import { financeAIapi } from "../../api/AxiosConfig";
+import { financeAIapi,api } from "../../api/AxiosConfig";
 import SideNavBar from "../SideNavBar/SideNavBar";
 
 const KnowledgePage = () => {
@@ -24,7 +24,7 @@ const KnowledgePage = () => {
     try {
       setLoading(true);
 
-      const response = await financeAIapi.get("/file/getFiles");
+      const response = await api.get("/financeAIFile/getFiles");
 
       console.log("Fetching fiels",response.data.data);
 
@@ -64,8 +64,8 @@ const KnowledgePage = () => {
     try {
       setUploading(true);
 
-      const response = await financeAIapi.post(
-        "/file",
+      const response = await api.post(
+        "/financeAIFile",
         formData
       );
       setSelectedFile(null);
@@ -94,7 +94,7 @@ const KnowledgePage = () => {
     }
 
     try {
-      const response=await financeAIapi.delete("/file", {
+      const response=await api.delete("/financeAIFile", {
         params: {
           objectKey: objectKey
         }
@@ -124,7 +124,7 @@ const KnowledgePage = () => {
 
   const handleDownload = async (doc) => {
     try {
-      const response = await financeAIapi.get("/file", {
+      const response = await api.get("/financeAIFile", {
         params: {
           objectKey: doc.objectKey
         },

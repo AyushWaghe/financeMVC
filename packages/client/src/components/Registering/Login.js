@@ -21,13 +21,13 @@ function Login() {
     setError(''); 
 
     try {
-      console.log("Trying to login");
       const response = await api.post('/auth/signin', {
         useremail,
         password,
       },{
         withCredentials:true //This tells Axios to send and receive cookies. 
       });
+      console.log("login repsonse",response)
       if (response.data.success) {
         
         dispatch(login({
@@ -50,8 +50,11 @@ function Login() {
         setError('Invalid credentials'); 
       }
     } catch (err) {
-      console.log(err);
-      setError('An error occurred'); 
+      if(err?.response?.status==401){
+        setError('Invalid username/password'); 
+      }else{
+        setError('An error occurred'); 
+      }
     } finally {
       setLoading(false);
     }
