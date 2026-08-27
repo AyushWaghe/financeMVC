@@ -12,6 +12,8 @@ import {
   faRightFromBracket,
   faBars,
   faXmark,
+  faRobot,
+  faFolderOpen
 } from "@fortawesome/free-solid-svg-icons";
 import "./SideNavBar.css";
 import axios from "axios";
@@ -51,6 +53,8 @@ const SideNavBar = ({ isToggle }) => {
     { label: "Bill History", icon: faList, path: "/PastBills" },
     { label: "Home", icon: faHome, path: "/Home" },
     { label: "Profile", icon: faUser, path: "/Profile" },
+    { label: "Fin Guru", icon: faRobot, path: "/FinanceAIPage" },
+    { label: "knowledge Vault", icon: faFolderOpen, path: "/KnowledgePage" },
   ];
 
   return (

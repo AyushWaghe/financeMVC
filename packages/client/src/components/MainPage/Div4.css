@@ -1,0 +1,160 @@
+/* =========================================
+   DIV4 - UNIQUE FEATURES
+   Completely isolated from existing CSS
+   ========================================= */
+
+   .div4-section {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 40px 20px;
+    background-color:  #8bf0cb;
+  }
+  
+  /* Heading */
+  
+  .div4-header {
+    text-align: center;
+    margin: 0 0 45px;
+  
+    font-size: 2.4rem;
+    font-weight: 700;
+  }
+  
+  /* Rows */
+  
+  .div4-row {
+    width: 100%;
+    max-width: 1050px;
+  
+    margin: 0 auto 35px;
+  
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 35px;
+  }
+  
+  .div4-single-row {
+    margin-bottom: 35px;
+  }
+  
+  /* Feature */
+  
+  .div4-feature {
+    flex: 1;
+    max-width: 500px;
+  
+    text-align: center;
+  
+    padding: 30px 25px;
+  
+    box-sizing: border-box;
+  
+    border-radius: 20px;
+  
+    /* Keeps your existing page theme */
+    background: transparent;
+  
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+  
+  .div4-feature:hover {
+    transform: translateY(-6px);
+  }
+  
+  /* BIG ICON */
+  
+  .div4-icon-box {
+    width: 100px;
+    height: 100px;
+  
+    margin: 0 auto 20px;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    border-radius: 25px;
+  
+    /* No new color — uses your existing theme */
+    background: rgba(98, 201, 126, 0.08);
+  
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+  
+  .div4-feature-icon {
+    font-size: 3.8rem;
+  
+    /* Important: inherit the existing icon/text color */
+    color: inherit;
+  
+    transition: transform 0.3s ease;
+  }
+  
+  .div4-feature:hover .div4-icon-box {
+    transform: scale(1.08);
+  }
+  
+  .div4-feature:hover .div4-feature-icon {
+    transform: scale(1.08);
+  }
+  
+  /* Titles */
+  
+  .div4-feature-title {
+    margin: 0 0 12px;
+  
+    font-size: 1.45rem;
+    font-weight: 600;
+  }
+  
+  /* Description */
+  
+  .div4-feature-text {
+    max-width: 440px;
+  
+    margin: 0 auto;
+  
+    font-size: 0.98rem;
+    line-height: 1.65;
+  
+    opacity: 0.75;
+  }
+  
+  /* Mobile */
+  
+  @media (max-width: 700px) {
+    .div4-section {
+      padding: 30px 15px;
+    }
+  
+    .div4-header {
+      font-size: 2rem;
+      margin-bottom: 35px;
+    }
+  
+    .div4-row {
+      flex-direction: column;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+  
+    .div4-feature {
+      max-width: 100%;
+    }
+  
+    .div4-icon-box {
+      width: 85px;
+      height: 85px;
+    }
+  
+    .div4-feature-icon {
+      font-size: 3rem;
+    }
+  }

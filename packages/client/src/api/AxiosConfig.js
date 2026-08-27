@@ -1,10 +1,11 @@
 import axios from "axios";
 
-const api = axios.create({
-    baseURL: process.env.REACT_APP_API_BASE_URL,
-    withCredentials: true
+export const api = axios.create({
+  baseURL: process.env.REACT_APP_API_BASE_URL,
+  withCredentials: true
 });
 
-export default api;
-
-//sdsd
+export const financeAIapi = axios.create({
+  baseURL: process.env.REACT_APP_API_BASE_URL_FINANCE_AI,
+  withCredentials: true
+});

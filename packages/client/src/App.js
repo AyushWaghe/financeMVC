@@ -12,6 +12,8 @@ import PastBills from './components/PastBills/PastBills.js';
 import Profile from './components/UserProfile/Profile.js';
 import './App.css';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.js';
+import FinanceAIPage from './components/FinanceAI/FinanceAIPage.js';
+import KnowledgePage from './components/KnowledgePage/KnowledgePage.js';
 
 function App() {
   return (
@@ -32,6 +34,8 @@ function App() {
           <Route path="/BillReminder" element={<BillReminder />} />
           <Route path="/PastBills" element={<PastBills />} />
           <Route path="/Profile" element={<Profile />} />
+          <Route path="/FinanceAIPage" element={<FinanceAIPage />} />
+          <Route path="/KnowledgePage" element={<KnowledgePage />} />
           </Route>
         </Routes>
       </div>

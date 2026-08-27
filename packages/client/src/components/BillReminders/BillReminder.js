@@ -6,7 +6,10 @@ import { useSelector } from 'react-redux';
 import SideNavBar from '../SideNavBar/SideNavBar';
 import BillInstanceField from "./BillInstanceField.js";
 import { faL } from "@fortawesome/free-solid-svg-icons";
-import api from "../../api/AxiosConfig";
+import {api} from "../../api/AxiosConfig";
+import { signup } from "../../features/userSlice";
+import PageSizeDropDown from "../Widgets/PageSizeDropDown";
+import PaginationControls from "../Widgets/PaginationControls";
 
 const BillReminder = () => {
 
@@ -14,6 +17,15 @@ const BillReminder = () => {
 
   const [handleSubmitStatus, setHandleSubmitStatus] = useState(false);
 
+  const [page, setPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const [pageSize, setPageSize] = useState(5);
+  const [page2, setPage2] = useState(0);
+  const [totalPages2, setTotalPages2] = useState(0);
+  const [pageSize2, setPageSize2] = useState(5);
+  const [page3, setPage3] = useState(0);
+  const [totalPages3, setTotalPages3] = useState(0);
+  const [pageSize3, setPageSize3] = useState(5);
   const [title, settitle] = useState('');
   const [amount, setamount] = useState('');
   const [dueDate, setDueDate] = useState('');
@@ -22,7 +34,7 @@ const BillReminder = () => {
   const [billInstances, setBillInstances] = useState([]);
   const [overdueBillInstances, setOverdueBillInstances] = useState([]);
   const [isUpdating, setIsUpdating] = useState(false);
-  const [billId,setBillId]=useState('');
+  const [billId, setBillId] = useState('');
 
 
   const user = useSelector((state) => state.user);
@@ -50,10 +62,16 @@ const BillReminder = () => {
 
   const fetchBills = async () => {
     try {
-      const response = await api.get(`/bill/user/${userId}`,{
-        withCredentials:true //This tells Axios to send and receive cookies. 
+      const response = await api.get(`/bill/user/${userId}`, {
+        params: {
+          page: page,
+          size: pageSize
+        },
+        withCredentials: true //This tells Axios to send and receive cookies. 
       });
-      setBills(response.data.data);
+      // console.log("Resposne is", response);
+      setBills(response.data.data.content);
+      setTotalPages(response.data.data.totalPages)
     } catch (err) {
       console.log(err);
     }
@@ -62,11 +80,16 @@ const BillReminder = () => {
   const fetchBillInstances = async () => {
     //Get bill instances of the user 
     try {
-      const response = await api.get(`/bill-instance/upcoming/${userId}`,{
-        withCredentials:true //This tells Axios to send and receive cookies. 
+      const response = await axios.get(`/bill-instance/upcoming/${userId}`, {
+        params: {
+          page: page2,
+          size: pageSize2
+        },
+        withCredentials: true //This tells Axios to send and receive cookies. 
       });
-      setBillInstances(response.data.data);
-      console.log("Bill instances", response.data.data);
+      setBillInstances(response.data.data.content);
+      setTotalPages2(response.data.data.totalPages)
+      // console.log("TOTAL PAGES", response.data.data.totalPages);
     } catch (err) {
       console.log(err);
     }
@@ -75,10 +98,15 @@ const BillReminder = () => {
   const fetchOverDueBillInstances = async () => {
     //Get bill instances of the user 
     try {
-      const response = await api.get(`/bill-instance/overdue/${userId}`,{
-        withCredentials:true //This tells Axios to send and receive cookies. 
+      const response = await api.get(`/bill-instance/overdue/${userId}`, {
+        params: {
+          page: page3,
+          size: pageSize3
+        },
+        withCredentials: true //This tells Axios to send and receive cookies. 
       });
-      setOverdueBillInstances(response.data.data);
+      setOverdueBillInstances(response.data.data.content);
+      setTotalPages3(response.data.data.totalPages)
       // console.log("Bill instances", response.data.data);
     } catch (err) {
       console.log(err);
@@ -110,11 +138,11 @@ const BillReminder = () => {
       dueDate: dateToUse,
     }
 
-    if(isUpdating===true){
+    if (isUpdating === true) {
       billData.billRecurrence = recurrenceType;
       try {
-        await api.put(`/bill/${billId}`, billData,{
-          withCredentials:true //This tells Axios to send and receive cookies. 
+        await api.put(`/bill/${billId}`, billData, {
+          withCredentials: true //This tells Axios to send and receive cookies. 
         });
       } catch (e) {
         console.log(e);
@@ -131,8 +159,8 @@ const BillReminder = () => {
     if (recurrenceType === "NONE") {
       billData.billStatus = "PENDING";
       try {
-        await api.post('/bill-instance', billData,{
-          withCredentials:true //This tells Axios to send and receive cookies. 
+        await api.post('/bill-instance', billData, {
+          withCredentials: true //This tells Axios to send and receive cookies. 
         });
       } catch (e) {
         console.log(e);
@@ -140,8 +168,8 @@ const BillReminder = () => {
     } else {
       billData.billRecurrence = recurrenceType;
       try {
-        await api.post('/bill', billData,{
-          withCredentials:true //This tells Axios to send and receive cookies. 
+        await api.post('/bill', billData, {
+          withCredentials: true //This tells Axios to send and receive cookies. 
         });
       } catch (e) {
         console.log(e);
@@ -162,6 +190,19 @@ const BillReminder = () => {
     fetchAllBills();
     fetchOverDueBillInstances();
   }, []);
+
+
+  useEffect(() => {
+    fetchBills();
+  }, [page, pageSize]);
+
+  useEffect(() => {
+    fetchBillInstances();
+  }, [page2, pageSize2]);
+
+  useEffect(() => {
+    fetchOverDueBillInstances();
+  }, [page3, pageSize3]);
 
   return (
     <div className="BillReminderPageContainer">
@@ -262,23 +303,54 @@ const BillReminder = () => {
             </div>
           </form>
         </div>
+        <PageSizeDropDown
+          pageSize={pageSize}
+          setPageSize={setPageSize}
+          setPage={setPage} />
         <BillField
           bills={bills}
           onDelete={fetchAllBills}
           handleUpdate={handleUpdate}
         />
+        <PaginationControls
+          page={page}
+          setPage={setPage}
+          totalPages={totalPages}
+        />
+
+         <PageSizeDropDown
+          pageSize={pageSize2}
+          setPageSize={setPageSize2}
+          setPage={setPage2} />
         <BillInstanceField
           bills={billInstances}
           onDelete={fetchBillInstances}
           sectionTitle={"UPCOMING BILLS"}
           status={"PENDING"}
         />
+         <PaginationControls
+          page={page2}
+          setPage={setPage2}
+          totalPages={totalPages2}
+        />
+        
+        <PageSizeDropDown
+          pageSize={pageSize3}
+          setPageSize={setPageSize3}
+          setPage={setPage3} />
         <BillInstanceField
           bills={overdueBillInstances}
           onDelete={fetchOverDueBillInstances}
           sectionTitle={"OVERDUE BILLS!"}
           status={"OVERDUE"}
         />
+         <PaginationControls
+          page={page3}
+          setPage={setPage3}
+          totalPages={totalPages3}
+        />
+        
+
       </div>
 
     </div>

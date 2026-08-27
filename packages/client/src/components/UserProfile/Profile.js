@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import axios from 'axios';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import "./Profile.css";
 import SideNavBar from "../SideNavBar/SideNavBar";
-import api from "../../api/AxiosConfig";
+import {api} from "../../api/AxiosConfig";
 
 const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);

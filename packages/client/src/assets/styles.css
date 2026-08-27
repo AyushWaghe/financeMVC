@@ -651,3 +651,34 @@ form {
 .ContactSubmit:hover {
     background-color: darkgreen;
 }
+
+.featureIcon {
+  font-size: 4.2rem;
+  width: 50px;
+  height: 100px;
+  padding: 22px;
+  border-radius: 24px;
+
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 18px;
+
+  transition: 
+    transform 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.UniqueContent:hover .featureIcon {
+  transform: translateY(-6px) scale(1.08);
+
+  background: rgba(255, 255, 255, 0.14);
+
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.2);
+}

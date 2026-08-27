@@ -1,8 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import axios from 'axios';
 import '../../assets/FieldStyle.css';
-import api from '../../api/AxiosConfig';
+import {api} from '../../api/AxiosConfig';
 
 function Field({ transactions, onDelete, onEdit, Month,total,year }) {
 

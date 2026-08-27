@@ -5,7 +5,7 @@ import Chart from 'chart.js/auto';
 import axios from 'axios';
 import SideNavBar from '../SideNavBar/SideNavBar';
 import './GraphStyles.css';
-import api from '../../api/AxiosConfig';
+import {api} from '../../api/AxiosConfig';
 
 const monthNames = [
     'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',

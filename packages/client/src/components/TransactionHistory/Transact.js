@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Field from './Field';
-import axios from 'axios';
 import './TransactionHistory.css';
 import SideNavBar from '../SideNavBar/SideNavBar';
-import api from '../../api/AxiosConfig';
+import {api} from '../../api/AxiosConfig';
 import { addCategory, selectCategories } from '../../features/categorySlice';
 
 
@@ -41,12 +40,16 @@ function Transact() {
 
   const categories = useSelector(selectCategories);
   const [showCategories, setShowCategories] = useState(false);
+  const [page, setPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const [pageSize, setPageSize] = useState(10);
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
   const [transactionType, setTransactionType] = useState("EXPENSE");
   const [title, setTitle] = useState('');
   const [cost, setCost] = useState('');
   const [date, setDate] = useState('');
+
 
   const [transactionsError, setTransactionsError] = useState("");
   const [statsError, setStatsError] = useState("");
@@ -113,13 +116,13 @@ function Transact() {
 
     try {
       const transactionsResponse = await api.get(
-        `/transactions/monthly?userId=${userId}&month=${month}&year=${year}`,
+        `/transactions/monthly?userId=${userId}&month=${month}&year=${year}&page=${page}&size=${pageSize}`,
         {
           withCredentials: true //This tells Axios to send and receive cookies. 
         });
 
-      setTransactions(transactionsResponse.data.data);
-      setMonthTotal(transactionsResponse.data.monthTotal);
+      setTransactions(transactionsResponse.data.data.content);
+      setTotalPages(transactionsResponse.data.data.totalPages)
     } catch (error) {
       console.error('Error fetching transactions:', error.message);
       setTransactions([]);
@@ -231,9 +234,10 @@ function Transact() {
   };
 
   const handleAppliedMonthFilter = () => {
-    fetchTransactions();
     setSelectedMonthName(months.find((month) => month.value === selectedMonth)?.label);
     setFinalSelectedYear(selectedYear);
+    setPage(0);
+    fetchTransactions();
   };
 
   const handleClearFilter = () => {
@@ -271,7 +275,7 @@ function Transact() {
 
   useEffect(() => {
     fetchTransactions();
-  }, []);
+  }, [page, pageSize]);
 
   return (
     <div className="transaction-history-container">
@@ -509,6 +513,23 @@ function Transact() {
               </div>
             </form>
           </div>
+          <div className="page-size-container">
+              <label htmlFor="pageSize">Items per page:</label>
+
+              <select
+                id="pageSize"
+                value={pageSize}
+                onChange={(e) => {
+                  setPageSize(Number(e.target.value));
+                  setPage(0);
+                }}
+                className="page-size-select"
+              >
+                <option value={5}>5</option>
+                <option value={10}>10</option>
+                <option value={20}>20</option>
+              </select>
+            </div>
 
           {transactionsError && <p className="error-message">{transactionsError}</p>}
 
@@ -520,6 +541,27 @@ function Transact() {
             total={monthTotal}
             year={finalSelectedYear}
           />
+        </div>
+        <div className="pagination-controls">
+          <button
+            className="pagination-button"
+            onClick={() => setPage(prev => prev - 1)}
+            disabled={page === 0}
+          >
+            Previous
+          </button>
+
+          <span className="page-info">
+            Page {page + 1} of {totalPages}
+          </span>
+
+          <button
+            className="pagination-button"
+            onClick={() => setPage(prev => prev + 1)}
+            disabled={totalPages===0 || page === totalPages-1}
+          >
+            Next
+          </button>
         </div>
       </div>
     </div>

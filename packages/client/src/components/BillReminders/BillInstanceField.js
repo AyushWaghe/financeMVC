@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import '../../assets/FieldStyle.css';
-import api from '../../api/AxiosConfig';
+import {api} from '../../api/AxiosConfig';
 
 function BillInstanceField({ bills, onDelete, sectionTitle, status }) {
   // console.log(bills);

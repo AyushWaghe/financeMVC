@@ -1,5 +1,5 @@
 import axios from "axios";
-import api from "../../api/AxiosConfig";
+import {api} from "../../api/AxiosConfig";
 
 const fetchCategories = async (userId) => {
     try {

@@ -1,0 +1,466 @@
+.KnowledgePageContainer {
+    min-height: 100vh;
+    background: #f4f7fb;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .KnowledgeMasterContainer {
+    max-width: 90%;
+    margin-left: 10%;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  
+  .card {
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid #e3e8ef;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+    box-sizing: border-box;
+  }
+  
+  
+  /* =========================
+     Header
+  ========================= */
+  
+  .KnowledgeHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  
+  .KnowledgeHeader h1 {
+    margin: 0;
+    text-align: center;
+    width: 100%;
+    color: #172033;
+    font-size: 24px;
+  }
+
+  
+  .KnowledgeHeader p {
+    margin: 6px 0 0;
+    color: #667085;
+    font-size: 14px;
+  }
+  
+  
+  /* =========================
+     Upload Button
+  ========================= */
+  
+  .KnowledgeUploadButton,
+  .KnowledgeConfirmButton {
+    min-height: 40px;
+    padding: 0 16px;
+  
+    border: none;
+    border-radius: 6px;
+  
+    background: #196b55;
+    color: #ffffff;
+  
+    cursor: pointer;
+  
+    font-weight: 700;
+  
+    transition:
+      transform 0.15s ease,
+      box-shadow 0.15s ease,
+      background-color 0.15s ease;
+  }
+  
+  .KnowledgeUploadButton:hover,
+  .KnowledgeConfirmButton:hover:not(:disabled) {
+    background: #124b3b;
+    box-shadow: 0 8px 18px rgba(25, 107, 85, 0.25);
+    transform: translateY(-1px);
+  }
+  
+  .KnowledgeConfirmButton:disabled {
+    background: #b7c1cf;
+    cursor: not-allowed;
+  }
+  
+  
+  /* =========================
+     Selected File
+  ========================= */
+  
+  .KnowledgeSelectedFile {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  
+    background: #f8fafc;
+  }
+  
+  .KnowledgeSelectedFile > div:first-child {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .KnowledgeSelectedLabel {
+    color: #667085;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  
+  .KnowledgeSelectedFile strong {
+    color: #172033;
+    font-size: 14px;
+  }
+  
+  .KnowledgeSelectedActions {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .KnowledgeCancelButton {
+    min-height: 40px;
+    padding: 0 16px;
+  
+    border: none;
+    border-radius: 6px;
+  
+    background: #eef2f7;
+    color: #344054;
+  
+    cursor: pointer;
+    font-weight: 700;
+  }
+  
+  .KnowledgeCancelButton:hover {
+    background: #dbe3ef;
+  }
+  
+  
+  /* =========================
+     Documents
+  ========================= */
+  
+  .KnowledgeDocumentsHeader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    padding-bottom: 18px;
+    border-bottom: 1px solid #e3e8ef;
+  }
+  
+  .KnowledgeDocumentsHeader h2 {
+    margin: 0;
+    color: #172033;
+    font-size: 18px;
+    column-gap: 20px;
+  }
+  
+  .KnowledgeDocumentsHeader p {
+    margin: 5px 0 0;
+    color: #667085;
+    font-size: 13px;
+  }
+  
+  .KnowledgeDocumentCount {
+    min-width: 30px;
+    height: 30px;
+  
+    border-radius: 50%;
+  
+    background: #eef2f7;
+    color: #344054;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    font-size: 13px;
+    font-weight: 700;
+    margin-left: 10px;
+  }
+  
+  
+  /* =========================
+     Document List
+  ========================= */
+  
+  .KnowledgeDocumentList {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .KnowledgeDocumentItem {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  
+    padding: 18px 5px;
+  
+    border-bottom: 1px solid #eef2f7;
+  }
+  
+  .KnowledgeDocumentItem:last-child {
+    border-bottom: none;
+  }
+  
+  .KnowledgeDocumentIcon {
+    width: 45px;
+    height: 45px;
+  
+    min-width: 45px;
+  
+    border-radius: 7px;
+  
+    background: #eef2f7;
+    color: #196b55;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    font-size: 11px;
+    font-weight: 800;
+  }
+  
+  .KnowledgeDocumentMain {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .KnowledgeDocumentTitle {
+    color: #172033;
+    font-size: 15px;
+    font-weight: 700;    
+  
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: left;
+  }
+  
+  .KnowledgeDocumentSummary {
+    margin-top: 5px;
+    color: #040405;
+    font-size: 13px;
+  
+    white-space: normal;
+    overflow-wrap: anywhere;
+    line-height: 1.5;
+    text-align: left;
+  }
+  
+  .KnowledgeDocumentMeta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  
+    margin-top: 8px;
+  
+    color: #040405;
+    font-size: 12px;
+  }
+  
+  
+  /* =========================
+     Status
+  ========================= */
+  
+  .KnowledgeStatus {
+    padding: 4px 8px;
+  
+    border-radius: 5px;
+  
+    background: #eef2f7;
+  
+    font-weight: 700;
+    text-transform: capitalize;
+  }
+  
+  .KnowledgeStatus-completed {
+    color: #196b55;
+    background: #e8f5f0;
+  }
+  
+  .KnowledgeStatus-processing {
+    color: #344054;
+    background: #eef2f7;
+  }
+  
+  .KnowledgeStatus-failed,
+  .KnowledgeStatus-rejected {
+    color: #b42318;
+    background: #fef3f2;
+  }
+  
+  
+  /* =========================
+     Delete
+  ========================= */
+  
+  .KnowledgeDeleteButton {
+    min-height: 36px;
+    padding: 0 13px;
+  
+    border: 1px solid #e3e8ef;
+    border-radius: 6px;
+  
+    background: #ffffff;
+    color: #b42318;
+  
+    cursor: pointer;
+  
+    font-weight: 700;
+  }
+  
+  .KnowledgeDeleteButton:hover {
+    background: #fef3f2;
+    border-color: #fecdca;
+  }
+  
+  
+  /* =========================
+     Empty State
+  ========================= */
+  
+  .KnowledgeEmptyState {
+    padding: 70px 20px;
+  
+    text-align: center;
+  
+    color: #667085;
+  }
+  
+  .KnowledgeEmptyIcon {
+    width: 55px;
+    height: 55px;
+  
+    margin: 0 auto 15px;
+  
+    border-radius: 50%;
+  
+    background: #eef2f7;
+    color: #196b55;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    font-size: 11px;
+    font-weight: 800;
+  }
+  
+  .KnowledgeEmptyState h3 {
+    margin: 0;
+  
+    color: #172033;
+    font-size: 17px;
+  }
+  
+  .KnowledgeEmptyState p {
+    margin: 7px 0 0;
+  
+    font-size: 13px;
+  }
+  
+  
+  /* =========================
+     Responsive
+  ========================= */
+  
+  @media only screen and (max-width: 1100px) {
+  
+    .KnowledgeMasterContainer {
+      max-width: 100%;
+      margin-left: 0;
+    }
+  }
+  
+  @media only screen and (max-width: 600px) {
+  
+    .KnowledgePageContainer {
+      padding: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .KnowledgeDocumentsHeader h2 {
+        text-align: center;
+        width: 100%;
+        margin-left: 200px;
+      }
+  
+    .KnowledgeHeader {
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+  
+    .KnowledgeUploadButton {
+      width: 100%;
+    }
+  
+    .KnowledgeSelectedFile {
+      align-items: stretch;
+      flex-direction: column;
+    }
+  
+    .KnowledgeSelectedActions {
+      width: 100%;
+    }
+  
+    .KnowledgeSelectedActions button {
+      flex: 1;
+    }
+  
+    .KnowledgeDocumentItem {
+      align-items: flex-start;
+    }
+  
+    .KnowledgeDeleteButton {
+      align-self: center;
+    }
+  
+    .KnowledgeDocumentMeta {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 5px;
+    }
+  }
+
+  .KnowledgeDocumentsSubHeader {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .KnowledgeDocumentActions {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .KnowledgeDownloadButton {
+    min-height: 36px;
+    padding: 0 13px;
+  
+    border: none;
+    border-radius: 6px;
+  
+    background: #196b55;
+    color: #ffffff;
+  
+    cursor: pointer;
+    font-weight: 700;
+  }
+  
+  .KnowledgeDownloadButton:hover {
+    background: #124b3b;
+  }

@@ -1,9 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { login, setBillAlertStatus } from '../../features/userSlice';
-import api from '../../api/AxiosConfig';
+import {api} from '../../api/AxiosConfig';
 import { setCategories } from '../../features/categorySlice';
 import fetchCategories from '../Functions/fetchCategories';
 

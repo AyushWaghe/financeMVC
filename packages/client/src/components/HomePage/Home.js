@@ -8,8 +8,21 @@ import axios from 'axios';
 import BillAlert from '../BillAlert/BillAlert';
 import { setBillAlertStatus } from '../../features/userSlice';
 import Navbar from '../NavBar/Navbar';
+import {
+  faReceipt,
+  faNewspaper,
+  faChartPie,
+  faBell,
+  faFileInvoiceDollar,
+  faRobot,
+  faFolderOpen
+} from '@fortawesome/free-solid-svg-icons';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function Home() {
+
+  
 
 
   const user = useSelector((state) => state.user);
@@ -73,6 +86,7 @@ function Home() {
       <div className="content">
         <div className="content-row">
           <div className="HomePageCards" id="transaction-history">
+          <FontAwesomeIcon icon={faReceipt} className="home-feature-icon" />
             <h2>Transaction History</h2>
             <p>Store and track your transactions month wise easily.</p>
             <button className="explore-button"
@@ -81,47 +95,77 @@ function Home() {
           </div>
 
           <div className="HomePageCards" id="transaction-history">
+          <FontAwesomeIcon icon={faNewspaper} className="home-feature-icon" />
             <h2>FinanceFeed</h2>
             <p>Stay Informed with the Latest Financial News</p>
 
             <button className="explore-button"
               onClick={() => navigate("/Main")}
             >Explore</button>
-           
+
           </div>
         </div>
 
         <div className="content-row">
           <div className="HomePageCards" id="transaction-history">
+          <FontAwesomeIcon icon={faChartPie} className="home-feature-icon" />
             <h2>Graphs</h2>
             <p>Visualize and track your total monthly expenditure and plan accordingly</p>
-           
+
             <button className="explore-button"
               onClick={() => navigate("/Graphs")}
             >Explore</button>
-   
+
           </div>
 
           <div className="HomePageCards" id="transaction-history">
+          <FontAwesomeIcon icon={faBell} className="home-feature-icon" />
             <h2>Bill reminders</h2>
-            <p>Never miss a payment with reminder feature, ensuring you stay on top of your financial commitments effortlessly.</p>
-      
+            <p>Never miss a payment with reminder feature</p>
+
             <button className="explore-button"
               onClick={() => navigate("/BillReminder")}
             >Explore</button>
-            
+
           </div>
         </div>
 
         <div className="content-row">
           <div className="HomePageCards" id="transaction-history">
+          <FontAwesomeIcon
+    icon={faFileInvoiceDollar}
+    className="home-feature-icon"
+  />
             <h2>Past bills</h2>
             <p>Get a history of past bills.</p>
-         
+
             <button className="explore-button"
               onClick={() => navigate("/PastBills")}
             >Explore</button>
-      
+
+          </div>
+
+          <div className="HomePageCards" id="transaction-history">
+          <FontAwesomeIcon icon={faRobot} className="home-feature-icon" />
+            <h2>Fin Guru</h2>
+            <p>Get all your financial doubts solved! With the Fin Guru AI!</p>
+
+            <button className="explore-button"
+              onClick={() => navigate("/FinanceAIPage")}
+            >Explore</button>
+
+          </div>
+        </div>
+        <div className="content-row">
+          <div className="HomePageCards" id="transaction-history">
+          <FontAwesomeIcon icon={faFolderOpen} className="home-feature-icon" />
+            <h2>Knowledge Vault</h2>
+            <p>Manage your financial documents over here</p>
+
+            <button className="explore-button"
+              onClick={() => navigate("/KnowledgePage")}
+            >Explore</button>
+
           </div>
         </div>
 
