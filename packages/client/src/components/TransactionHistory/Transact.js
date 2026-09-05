@@ -116,7 +116,7 @@ function Transact() {
 
     try {
       const transactionsResponse = await api.get(
-        `/transactions/monthly?userId=${userId}&month=${month}&year=${year}&page=${page}&size=${pageSize}`,
+        `/transactions/monthly?month=${month}&year=${year}&page=${page}&size=${pageSize}`,
         {
           withCredentials: true //This tells Axios to send and receive cookies. 
         });
@@ -132,7 +132,7 @@ function Transact() {
 
     try {
       const statsResponse = await api.get(
-        `/analytics/month-stats/user/${userId}?month=${month}&year=${year}`, {
+        `/analytics/month-stats/user?month=${month}&year=${year}`, {
         withCredentials: true //This tells Axios to send and receive cookies. 
       }
       );
@@ -160,7 +160,6 @@ function Transact() {
     const dateToUse = date ? formatDate(date) : formatDate(Date.now());
 
     const transactionData = {
-      userId: userId,
       title: title,
       description: description,
       amount: cost,

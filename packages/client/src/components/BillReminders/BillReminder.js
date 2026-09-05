@@ -62,7 +62,7 @@ const BillReminder = () => {
 
   const fetchBills = async () => {
     try {
-      const response = await api.get(`/bill/user/${userId}`, {
+      const response = await api.get(`/bill/user`, {
         params: {
           page: page,
           size: pageSize
@@ -80,7 +80,7 @@ const BillReminder = () => {
   const fetchBillInstances = async () => {
     //Get bill instances of the user 
     try {
-      const response = await axios.get(`/bill-instance/upcoming/${userId}`, {
+      const response = await api.get(`/bill-instance/upcoming`, {
         params: {
           page: page2,
           size: pageSize2
@@ -98,7 +98,7 @@ const BillReminder = () => {
   const fetchOverDueBillInstances = async () => {
     //Get bill instances of the user 
     try {
-      const response = await api.get(`/bill-instance/overdue/${userId}`, {
+      const response = await api.get(`/bill-instance/overdue`, {
         params: {
           page: page3,
           size: pageSize3
@@ -132,7 +132,6 @@ const BillReminder = () => {
     e.preventDefault();
 
     const billData = {
-      userId: userId,
       title: title,
       amount: amount,
       dueDate: dateToUse,

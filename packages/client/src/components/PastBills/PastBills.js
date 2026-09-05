@@ -23,7 +23,7 @@ const PastBills = () => {
 
     const fetchPaidBills = async () => {
         try {
-            const response = await api.get(`/bill-instance/status/user/${userId}`,{
+            const response = await api.get(`/bill-instance/status/user`,{
                 params:{
                     status:"PAID",
                     page: page,

@@ -30,7 +30,7 @@ const Profile = () => {
   const fetchUserDetails=async ()=>{
     try{
         const response = await api.get(
-            `/user-profile/${userId}`,{
+            `/user-profile`,{
               withCredentials:true //This tells Axios to send and receive cookies. 
             }
           );
@@ -75,7 +75,7 @@ const Profile = () => {
     try{
         // profile["id"]=userId;
         await api.put(
-            `/user-profile/${userId}`,profile,{
+            `/user-profile`,profile,{
               withCredentials:true //This tells Axios to send and receive cookies. 
             }
           );

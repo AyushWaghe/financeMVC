@@ -243,7 +243,7 @@ const Graphs = () => {
 
             try {
                 const response = await api.get(
-                    `/analytics/monthly-savings/user/${userId}`,
+                    `/analytics/monthly-savings/user`,
                     {
                         params: {
                             year: savingsYear
@@ -276,7 +276,7 @@ const Graphs = () => {
 
             try {
                 const response = await api.get(
-                    `/analytics/monthly-needs-wants/user/${userId}`,
+                    `/analytics/monthly-needs-wants/user`,
                     {
                         params: {
                             year: needsWantsYear
@@ -309,7 +309,7 @@ const Graphs = () => {
 
             try {
                 const response = await api.get(
-                    `/analytics/income-vs-expense/user/${userId}`,
+                    `/analytics/income-vs-expense/user`,
                     {
                         params: {
                             year: incomeExpenseYear
@@ -342,7 +342,7 @@ const Graphs = () => {
 
             try {
                 const response = await api.get(
-                    `/analytics/monthly-category/user/${userId}`,
+                    `/analytics/monthly-category/user`,
                     {
                         params: {
                             month: categoryMonth,
